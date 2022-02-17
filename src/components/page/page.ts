@@ -59,27 +59,31 @@ export default class Page {
     return data;
   };
 
+  private renderMovie = (data: any) => {
+    data.results.forEach((item: IData) => {
+      let movie = document.createElement('article');
+      movie.classList.add('movie');
+
+      movie.innerHTML = `
+        <h3 class="movie__title">${item.title}</h3>
+        <div class="movie__poster-wrapper">
+          <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}">
+        </div>
+        <p class="movie__description">${item.overview}</p>
+        <p class="movie__rate">${item.vote_average}</p>
+      `;
+
+      this.main.append(movie);
+    });
+  };
+
   private addMovies = async (): Promise<void> => {
     try {
       const data = await this.getData(
         'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=48fa0c325cf33db96de5b585427f9aa1'
       );
 
-      data.results.forEach((item: IData) => {
-        let movie = document.createElement('article');
-        movie.classList.add('movie');
-
-        movie.innerHTML = `
-          <h3 class="movie__title">${item.title}</h3>
-          <div class="movie__poster-wrapper">
-            <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}">
-          </div>
-          <p class="movie__description">${item.overview}</p>
-          <p class="movie__rate">${item.vote_average}</p>
-        `;
-
-        this.main.append(movie);
-      });
+      this.renderMovie(data);
     } catch (err) {}
   };
 
