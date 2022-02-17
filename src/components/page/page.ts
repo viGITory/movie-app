@@ -34,6 +34,13 @@ export default class Page {
     return this.container;
   };
 
+  private getData = async (url: string) => {
+    const result = await fetch(url);
+    const data = await result.json();
+
+    return data;
+  };
+
   public init = (): void => {
     this.render();
   };
