@@ -17,10 +17,12 @@ export default class Page {
     this.container.innerHTML = `
       <header class="header">
         <div class="container">
-          <a class="logo" href="#"></a>
-          <div class="search">
-            <label class="visually-hidden" for="movie-search">Search movie</label>
-            <input type="search" id="movie-search" placeholder="Search movie">
+          <div class="header__inner">
+            <a class="header__logo" href="#">Movie app</a>
+            <div class="header__search">
+              <label class="visually-hidden" for="movie-search">Search movie</label>
+              <input class="header__input" type="search" id="movie-search" placeholder="Search movie">
+            </div>
           </div>
         </div>
       </header>
@@ -32,9 +34,11 @@ export default class Page {
       </main>
       <footer class="footer">
         <div class="container">
-          <a class="footer__github" href="https://github.com/viGITory">viGITory</a>
-          <time class="footer__year">2022</time>
-          <a class="footer__logo" href="https://rs.school/js">RSSchool</a>
+          <div class="footer__inner">
+            <a class="footer__github" href="https://github.com/viGITory">viGITory</a>
+            <time class="footer__year">2022</time>
+            <a class="footer__logo" href="https://rs.school/js">RSSchool</a>
+          </div>
         </div>
       </footer>
     `;
@@ -65,8 +69,9 @@ export default class Page {
 
         movie.innerHTML = `
           <h3 class="movie__title">${item.title}</h3>
-          <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}">
-          <p class="movie__overview">${item.overview}</p>
+          <div class="movie__poster-wrapper">
+            <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}">
+          </div>
           <p class="movie__rate">${item.vote_average}</p>
         `;
 
