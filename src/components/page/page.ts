@@ -15,32 +15,34 @@ export default class Page {
 
   private render = (): HTMLDivElement => {
     this.container.innerHTML = `
-      <header class="header">
-        <div class="container">
-          <div class="header__inner">
-            <a class="header__logo" href="#">Movie app</a>
-            <div class="header__search">
-              <label class="visually-hidden" for="movie-search">Search movie</label>
-              <input class="header__input" type="search" id="movie-search" placeholder="Search movie">
+      <div class="page__inner">
+        <header class="header">
+          <div class="container">
+            <div class="header__inner">
+              <a class="header__logo" href="#">Movie app</a>
+              <div class="header__search">
+                <label class="visually-hidden" for="movie-search">Search movie</label>
+                <input class="header__input" type="search" id="movie-search" placeholder="Search movie">
+              </div>
             </div>
           </div>
-        </div>
-      </header>
-      <main class="main">
-        <div class="container">
-          <h1 class="visually-hidden">Movie-app</h1>
-          <div class="main__inner"></div>
-        </div>
-      </main>
-      <footer class="footer">
-        <div class="container">
-          <div class="footer__inner">
-            <a class="footer__github" href="https://github.com/viGITory">viGITory</a>
-            <time class="footer__year">2022</time>
-            <a class="footer__logo" href="https://rs.school/js">RSSchool</a>
+        </header>
+        <main class="main">
+          <div class="container">
+            <h1 class="visually-hidden">Movie-app</h1>
+            <div class="main__inner"></div>
           </div>
-        </div>
-      </footer>
+        </main>
+        <footer class="footer">
+          <div class="container">
+            <div class="footer__inner">
+              <a class="footer__github" href="https://github.com/viGITory">viGITory</a>
+              <time class="footer__year">2022</time>
+              <a class="footer__logo" href="https://rs.school/js">RSSchool</a>
+            </div>
+          </div>
+        </footer>
+      </div>
     `;
 
     return this.container;

@@ -1,0 +1,15 @@
+.page {
+  margin: 0;
+
+  font-family: Electrolize, sans-serif;
+  font-size: 16px;
+  color: #030303;
+
+  background-color: #f5f5f5;
+
+  &__inner {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+  }
+}

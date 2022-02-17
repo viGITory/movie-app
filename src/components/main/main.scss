@@ -1,0 +1,9 @@
+.main {
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 272px);
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+  }
+}
