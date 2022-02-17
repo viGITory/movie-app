@@ -74,6 +74,7 @@ export default class Page {
           <div class="movie__poster-wrapper">
             <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}">
           </div>
+          <p class="movie__description">${item.overview}</p>
           <p class="movie__rate">${item.vote_average}</p>
         `;
 
