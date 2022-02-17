@@ -1,5 +1,6 @@
 export default class Page {
   container: HTMLDivElement;
+  main!: HTMLDivElement;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
@@ -34,6 +35,10 @@ export default class Page {
     return this.container;
   };
 
+  private getElements = (): void => {
+    this.main = this.container.querySelector('.main__inner') as HTMLDivElement;
+  };
+
   private getData = async (url: string) => {
     const result = await fetch(url);
     const data = await result.json();
@@ -43,5 +48,6 @@ export default class Page {
 
   public init = (): void => {
     this.render();
+    this.getElements();
   };
 }
