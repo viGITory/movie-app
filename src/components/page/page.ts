@@ -71,7 +71,7 @@ export default class Page {
       movie.innerHTML = `
         <h3 class="movie__title">${item.title}</h3>
         <div class="movie__poster-wrapper">
-          <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}">
+          <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}" alt="Movie poster">
         </div>
         <p class="movie__description">${item.overview}</p>
         <p class="movie__rate">${item.vote_average}</p>
