@@ -7,7 +7,7 @@ interface IData {
 
 export default class Page {
   container: HTMLDivElement;
-  main!: HTMLDivElement;
+  moviesContainer!: HTMLDivElement;
   searchInput!: HTMLInputElement;
 
   constructor() {
@@ -31,7 +31,10 @@ export default class Page {
         <main class="main">
           <div class="container">
             <h1 class="visually-hidden">Movie-app</h1>
-            <div class="main__inner"></div>
+            <div class="main__inner">
+              <div class="main__movies"></div>
+              <button class="main__load-button" type="button">Load more</button>
+            </div>
           </div>
         </main>
         <footer class="footer">
@@ -50,7 +53,9 @@ export default class Page {
   };
 
   private getElements = (): void => {
-    this.main = this.container.querySelector('.main__inner') as HTMLDivElement;
+    this.moviesContainer = this.container.querySelector(
+      '.main__movies'
+    ) as HTMLDivElement;
     this.searchInput = this.container.querySelector(
       '.header__input'
     ) as HTMLInputElement;
@@ -77,7 +82,7 @@ export default class Page {
         <p class="movie__rate">${item.vote_average}</p>
       `;
 
-      this.main.append(movie);
+      this.moviesContainer.append(movie);
     });
   };
 
@@ -99,7 +104,7 @@ export default class Page {
             `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=48fa0c325cf33db96de5b585427f9aa1`
           );
 
-          this.main.innerHTML = '';
+          this.moviesContainer.innerHTML = '';
           this.renderMovie(data);
         } catch (err) {}
       }

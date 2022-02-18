@@ -1,9 +1,12 @@
 .main {
   &__inner {
+    padding: 20px 0;
+  }
+
+  &__movies {
     display: grid;
     grid-template-columns: repeat(auto-fill, 272px);
     justify-content: center;
     gap: 20px;
-    padding: 20px 0;
   }
 }
