@@ -8,6 +8,7 @@ interface IData {
 export default class Page {
   container: HTMLDivElement;
   main!: HTMLDivElement;
+  searchInput!: HTMLInputElement;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
@@ -50,6 +51,9 @@ export default class Page {
 
   private getElements = (): void => {
     this.main = this.container.querySelector('.main__inner') as HTMLDivElement;
+    this.searchInput = this.container.querySelector(
+      '.header__input'
+    ) as HTMLInputElement;
   };
 
   private getData = async (url: string) => {
@@ -87,9 +91,25 @@ export default class Page {
     } catch (err) {}
   };
 
+  private addListeners = (): void => {
+    this.searchInput.addEventListener('change', async () => {
+      if (this.searchInput.value !== '') {
+        try {
+          const data = await this.getData(
+            `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=48fa0c325cf33db96de5b585427f9aa1`
+          );
+
+          this.main.innerHTML = '';
+          this.renderMovie(data);
+        } catch (err) {}
+      }
+    });
+  };
+
   public init = (): void => {
     this.render();
     this.getElements();
     this.addMovies();
+    this.addListeners();
   };
 }
