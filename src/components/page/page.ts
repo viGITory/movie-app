@@ -23,7 +23,7 @@ export default class Page {
               <a class="header__logo" href="#">Movie app</a>
               <div class="header__search">
                 <label class="visually-hidden" for="movie-search">Search movie</label>
-                <input class="header__input" type="search" id="movie-search" placeholder="Search movie">
+                <input class="header__input" type="search" id="movie-search" placeholder="Search movie" autocomplete="off" autofocus>
               </div>
             </div>
           </div>
