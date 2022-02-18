@@ -12,11 +12,15 @@ export default class Page {
   loadButton!: HTMLButtonElement;
 
   pageCount: number;
+  currentRequest: string;
+  apiKey: string;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
 
     this.pageCount = 1;
+    this.apiKey = '48fa0c325cf33db96de5b585427f9aa1';
+    this.currentRequest = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${this.apiKey}&page=`;
   }
 
   private render = (): HTMLDivElement => {
@@ -76,73 +80,50 @@ export default class Page {
     return data;
   };
 
-  private renderMovie = (data: any) => {
-    data.results.forEach((item: IData) => {
-      let movie = document.createElement('article');
-      movie.classList.add('movie');
-
-      movie.innerHTML = `
-        <h3 class="movie__title">${item.title}</h3>
-        <div class="movie__poster-wrapper">
-          <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}" alt="Movie poster">
-        </div>
-        <p class="movie__description">${item.overview}</p>
-        <p class="movie__rate">${item.vote_average}</p>
-      `;
-
-      this.moviesContainer.append(movie);
-    });
-  };
-
-  private addMovies = async (): Promise<void> => {
+  private addMovies = async (url: string): Promise<void> => {
     try {
-      const data = await this.getData(
-        `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
-      );
+      const data = await this.getData(url + this.pageCount);
 
-      this.renderMovie(data);
+      data.results.forEach((item: IData) => {
+        let movie = document.createElement('article');
+        movie.classList.add('movie');
+
+        movie.innerHTML = `
+          <h3 class="movie__title">${item.title}</h3>
+          <div class="movie__poster-wrapper">
+            <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}" alt="Movie poster">
+          </div>
+          <p class="movie__description">${item.overview}</p>
+          <p class="movie__rate">${item.vote_average}</p>
+        `;
+
+        this.moviesContainer.append(movie);
+      });
     } catch (err) {}
   };
 
   private addListeners = (): void => {
-    this.searchInput.addEventListener('change', async () => {
+    this.searchInput.addEventListener('change', () => {
       if (this.searchInput.value !== '') {
-        try {
-          this.pageCount = 1;
-          const data = await this.getData(
-            `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
-          );
+        this.pageCount = 1;
+        this.currentRequest = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+        this.moviesContainer.innerHTML = '';
 
-          this.moviesContainer.innerHTML = '';
-          this.renderMovie(data);
-        } catch (err) {}
+        this.addMovies(this.currentRequest);
       }
     });
 
-    this.loadButton.addEventListener('click', async () => {
-      try {
-        let data;
-        this.pageCount++;
+    this.loadButton.addEventListener('click', () => {
+      this.pageCount++;
 
-        if (this.searchInput.value) {
-          data = await this.getData(
-            `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
-          );
-        } else if (this.searchInput.value !== '') {
-          data = await this.getData(
-            `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
-          );
-        }
-
-        this.renderMovie(data);
-      } catch (err) {}
+      this.addMovies(this.currentRequest);
     });
   };
 
   public init = (): void => {
     this.render();
     this.getElements();
-    this.addMovies();
+    this.addMovies(this.currentRequest);
     this.addListeners();
   };
 }
