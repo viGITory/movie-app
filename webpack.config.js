@@ -74,6 +74,7 @@ module.exports = ({ development }) => ({
     }),
     new HtmlWebpackPlugin({
       template: 'src/pages/index.html',
+      favicon: 'src/favicon.ico',
       filename: 'index.html',
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
