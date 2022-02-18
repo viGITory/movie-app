@@ -1,10 +1,19 @@
 .main {
   &__inner {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
     padding: 20px 0;
     row-gap: 20px;
+  }
+
+  &__top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
   }
 
   &__movies {
@@ -14,7 +23,7 @@
     gap: 20px;
   }
 
-  &__load-button {
+  &__button {
     padding: 10px;
 
     font-family: inherit;
@@ -25,9 +34,13 @@
     background-color: transparent;
     border: 1px solid rgba(0, 0, 0, .25);
     border-radius: 6px;
-    // box-shadow: -10px -10px 20px #fff, 10px 10px 20px rgb(0, 0, 0, .25);
+    outline: none;
 
     transition: box-shadow .2s, border-color .2s;
+
+    &[data-button="load"] {
+      margin-top: auto;
+    }
 
     &:hover {
       border-color: transparent;

@@ -1,4 +1,5 @@
 interface IData {
+  name: string;
   overview: string;
   poster_path: string;
   title: string;
@@ -9,7 +10,15 @@ export default class Page {
   container: HTMLDivElement;
   moviesContainer!: HTMLDivElement;
   searchInput!: HTMLInputElement;
+
   loadButton!: HTMLButtonElement;
+  movieNowPlayingButton!: HTMLButtonElement;
+  moviePopularButton!: HTMLButtonElement;
+  movieTopRatedButton!: HTMLButtonElement;
+  movieUpcomingButton!: HTMLButtonElement;
+  tvPopulartButton!: HTMLButtonElement;
+  tvTopRatedButton!: HTMLButtonElement;
+  buttons!: Element[];
 
   pageCount: number;
   currentRequest: string;
@@ -20,7 +29,7 @@ export default class Page {
 
     this.pageCount = 1;
     this.apiKey = '48fa0c325cf33db96de5b585427f9aa1';
-    this.currentRequest = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${this.apiKey}&page=`;
+    this.currentRequest = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
   }
 
   private render = (): HTMLDivElement => {
@@ -41,6 +50,14 @@ export default class Page {
           <div class="container">
             <h1 class="visually-hidden">Movie-app</h1>
             <div class="main__inner">
+              <div class="main__top">
+                <button class="main__button active-btn" type="button" data-button="movie-popular">Popular</button>
+                <button class="main__button" type="button" data-button="movie-now-playing">Now playing</button>
+                <button class="main__button" type="button" data-button="movie-top-rated">Top rated</button>
+                <button class="main__button" type="button" data-button="movie-upcoming">Upcoming</button>
+                <button class="main__button" type="button" data-button="tv-popular">Popular (TV)</button>
+                <button class="main__button" type="button" data-button="tv-top-rated">Top rated (TV)</button>
+              </div>
               <div class="main__movies"></div>
               <button class="main__button" type="button" data-button="load">Load more</button>
             </div>
@@ -68,9 +85,28 @@ export default class Page {
     this.searchInput = this.container.querySelector(
       '.header__input'
     ) as HTMLInputElement;
+    this.movieNowPlayingButton = this.container.querySelector(
+      '[data-button=movie-now-playing]'
+    ) as HTMLButtonElement;
+    this.moviePopularButton = this.container.querySelector(
+      '[data-button=movie-popular]'
+    ) as HTMLButtonElement;
+    this.movieTopRatedButton = this.container.querySelector(
+      '[data-button=movie-top-rated]'
+    ) as HTMLButtonElement;
+    this.movieUpcomingButton = this.container.querySelector(
+      '[data-button=movie-upcoming]'
+    ) as HTMLButtonElement;
+    this.tvPopulartButton = this.container.querySelector(
+      '[data-button=tv-popular]'
+    ) as HTMLButtonElement;
+    this.tvTopRatedButton = this.container.querySelector(
+      '[data-button=tv-top-rated]'
+    ) as HTMLButtonElement;
     this.loadButton = this.container.querySelector(
       '[data-button=load]'
     ) as HTMLButtonElement;
+    this.buttons = [...this.container.querySelectorAll('[data-button]')];
   };
 
   private getData = async (url: string) => {
@@ -89,9 +125,11 @@ export default class Page {
         movie.classList.add('movie');
 
         movie.innerHTML = `
-          <h3 class="movie__title">${item.title}</h3>
+          <h3 class="movie__title">${item.title || item.name}</h3>
           <div class="movie__poster-wrapper">
-            <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${item.poster_path}" alt="Movie poster">
+            <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${
+              item.poster_path
+            }" alt="Movie poster">
           </div>
           <p class="movie__description">${item.overview}</p>
           <p class="movie__rate">${item.vote_average}</p>
@@ -109,14 +147,42 @@ export default class Page {
         this.currentRequest = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
         this.moviesContainer.innerHTML = '';
 
+        this.buttons.forEach((elem) => {
+          elem.classList.remove('active-btn');
+        });
+
         this.addMovies(this.currentRequest);
       }
     });
 
-    this.loadButton.addEventListener('click', () => {
-      this.pageCount++;
+    this.buttons.forEach((item) => {
+      item.addEventListener('click', () => {
+        if (item === this.loadButton) this.pageCount++;
+        else if (item === this.movieNowPlayingButton)
+          this.currentRequest = `https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=`;
+        else if (item === this.moviePopularButton)
+          this.currentRequest = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
+        else if (item === this.movieTopRatedButton)
+          this.currentRequest = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=`;
+        else if (item === this.movieUpcomingButton)
+          this.currentRequest = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US&page=`;
+        else if (item === this.tvPopulartButton)
+          this.currentRequest = `https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}&language=en-US&page=`;
+        else if (item === this.tvTopRatedButton)
+          this.currentRequest = `https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=`;
 
-      this.addMovies(this.currentRequest);
+        if (item !== this.loadButton) {
+          this.buttons.forEach((elem) => {
+            elem.classList.remove('active-btn');
+          });
+          item.classList.add('active-btn');
+
+          this.pageCount = 1;
+          this.moviesContainer.innerHTML = '';
+        }
+
+        this.addMovies(this.currentRequest);
+      });
     });
   };
 
