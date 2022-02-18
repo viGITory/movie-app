@@ -9,9 +9,14 @@ export default class Page {
   container: HTMLDivElement;
   moviesContainer!: HTMLDivElement;
   searchInput!: HTMLInputElement;
+  loadButton!: HTMLButtonElement;
+
+  pageCount: number;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
+
+    this.pageCount = 1;
   }
 
   private render = (): HTMLDivElement => {
@@ -33,7 +38,7 @@ export default class Page {
             <h1 class="visually-hidden">Movie-app</h1>
             <div class="main__inner">
               <div class="main__movies"></div>
-              <button class="main__load-button" type="button">Load more</button>
+              <button class="main__button" type="button" data-button="load">Load more</button>
             </div>
           </div>
         </main>
@@ -59,6 +64,9 @@ export default class Page {
     this.searchInput = this.container.querySelector(
       '.header__input'
     ) as HTMLInputElement;
+    this.loadButton = this.container.querySelector(
+      '[data-button=load]'
+    ) as HTMLButtonElement;
   };
 
   private getData = async (url: string) => {
@@ -89,7 +97,7 @@ export default class Page {
   private addMovies = async (): Promise<void> => {
     try {
       const data = await this.getData(
-        'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=48fa0c325cf33db96de5b585427f9aa1'
+        `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
       );
 
       this.renderMovie(data);
@@ -100,14 +108,34 @@ export default class Page {
     this.searchInput.addEventListener('change', async () => {
       if (this.searchInput.value !== '') {
         try {
+          this.pageCount = 1;
           const data = await this.getData(
-            `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=48fa0c325cf33db96de5b585427f9aa1`
+            `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
           );
 
           this.moviesContainer.innerHTML = '';
           this.renderMovie(data);
         } catch (err) {}
       }
+    });
+
+    this.loadButton.addEventListener('click', async () => {
+      try {
+        let data;
+        this.pageCount++;
+
+        if (this.searchInput.value) {
+          data = await this.getData(
+            `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
+          );
+        } else if (this.searchInput.value !== '') {
+          data = await this.getData(
+            `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=48fa0c325cf33db96de5b585427f9aa1&page=${this.pageCount}`
+          );
+        }
+
+        this.renderMovie(data);
+      } catch (err) {}
     });
   };
 
