@@ -1,12 +1,20 @@
 .header {
-  border-bottom: 1px solid rgba(0, 0, 0, .25);
+  border-bottom: 1px solid transparent;
+  border-image:
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(0, 0, 0, .25) 50%,
+      transparent 100%
+    );
+  border-image-slice: 1;
 
   &__inner {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 10px 0;
   }
 
   &__logo,
@@ -16,7 +24,7 @@
 
   &__logo {
     padding-left: 40px;
-    font-size: 40px;
+    font-size: 39px;
     line-height: 1;
     text-decoration: none;
     text-transform: uppercase;
@@ -29,8 +37,7 @@
 
   &__input {
     width: 272px;
-    height: 40px;
-    padding: 0 10px;
+    padding: 10px;
 
     font-family: inherit;
     font-size: inherit;

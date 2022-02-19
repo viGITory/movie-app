@@ -2,6 +2,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  min-width: 272px;
   height: 400px;
 
   cursor: pointer;
@@ -12,17 +13,12 @@
   transition: box-shadow .2s;
   animation: fade-in .2s;
 
-  &:first-child,
-  &:nth-child(6),
-  &:nth-child(11),
-  &:nth-child(16) {
+  &:first-child {
     display: grid;
     padding: 0;
     column-gap: 10px;
     grid-column: span 2;
     grid-template-columns: 252px 1fr;
-
-    cursor: auto;
 
     &:hover {
       box-shadow: -10px -10px 20px #fff, 10px 10px 20px rgba(0, 0, 0, .25);
@@ -90,7 +86,7 @@
     margin-bottom: 10px;
 
     font-size: inherit;
-    font-weight: normal;
+    font-weight: 400;
   }
 
   &__poster-wrapper,
@@ -104,6 +100,10 @@
     z-index: -1;
     overflow: hidden;
 
+    background-image: url("../assets/svg/no-image.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
     border-radius: 8px;
 
     &,
