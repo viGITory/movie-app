@@ -1,4 +1,7 @@
 interface IData {
+  first_air_date: string;
+  release_date: string;
+  backdrop_path: string;
   name: string;
   overview: string;
   poster_path: string;
@@ -10,6 +13,7 @@ export default class Page {
   container: HTMLDivElement;
   preloader!: HTMLDivElement;
   moviesContainer!: HTMLDivElement;
+  movieModal!: HTMLDivElement;
   searchInput!: HTMLInputElement;
 
   loadButton!: HTMLButtonElement;
@@ -37,26 +41,10 @@ export default class Page {
     this.container.innerHTML = `
       <div class="preloader">
         <div class="preloader__inner">
-          <div class="preloader__square">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="preloader__square">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="preloader__square">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="preloader__square">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          <div class="preloader__square"><span></span><span></span><span></span></div>
+          <div class="preloader__square"><span></span><span></span><span></span></div>
+          <div class="preloader__square"><span></span><span></span><span></span></div>
+          <div class="preloader__square"><span></span><span></span><span></span></div>
         </div>
       </div>
       <div class="page__inner">
@@ -97,6 +85,7 @@ export default class Page {
             </div>
           </div>
         </footer>
+        <div class="movie-modal hide"></div>
       </div>
     `;
 
@@ -109,6 +98,9 @@ export default class Page {
     ) as HTMLDivElement;
     this.moviesContainer = this.container.querySelector(
       '.main__movies'
+    ) as HTMLDivElement;
+    this.movieModal = this.container.querySelector(
+      '.movie-modal'
     ) as HTMLDivElement;
     this.searchInput = this.container.querySelector(
       '.header__input'
@@ -167,6 +159,27 @@ export default class Page {
     return data;
   };
 
+  private renderModal = (data: IData): HTMLDivElement => {
+    this.movieModal.innerHTML = `
+      <div class="movie-modal__inner">
+        <h3 class="movie-modal__title">${data.title || data.name}</h3>
+        <div class="movie-modal__poster-wrapper">
+          <img class="movie-modal__poster" src="https://image.tmdb.org/t/p/w1280${
+            data.backdrop_path
+          }" alt="Movie poster">
+        </div>
+        <div class="movie-modal__description-wrapper">
+          <p class="movie-modal__description">${data.overview}</p>
+          <p class="movie-modal__release">Release date: ${
+            data.release_date || data.first_air_date
+          }</p>
+        </div>
+      </div>
+    `;
+
+    return this.movieModal;
+  };
+
   private addMovies = async (url: string): Promise<void> => {
     try {
       const data = await this.getData(url + this.pageCount);
@@ -182,9 +195,13 @@ export default class Page {
               item.poster_path
             }" alt="Movie poster">
           </div>
-          <p class="movie__description">${item.overview}</p>
           <p class="movie__rate">${item.vote_average}</p>
         `;
+
+        movie.addEventListener('click', () => {
+          this.renderModal(item);
+          this.movieModal.classList.toggle('hide');
+        });
 
         this.moviesContainer.append(movie);
       });
@@ -192,6 +209,19 @@ export default class Page {
   };
 
   private addListeners = (): void => {
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+
+      if (
+        !this.container
+          .querySelector('.movie-modal__inner')!
+          .contains(target) &&
+        !target.classList.contains('movie')
+      ) {
+        this.movieModal.classList.add('hide');
+      }
+    });
+
     this.searchInput.addEventListener('change', () => {
       if (this.searchInput.value !== '') {
         this.pageCount = 1;

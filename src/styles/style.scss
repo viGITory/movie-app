@@ -14,6 +14,8 @@
 @import "../components/movie/movie";
 @import "../components/footer/footer";
 
+@import "../components/movie-modal/movie-modal";
+
 // ### JS ###
 .active-btn {
   border-color: transparent;
@@ -21,6 +23,6 @@
 }
 
 .hide {
-  z-index: -100;
+  pointer-events: none;
   opacity: 0;
 }
