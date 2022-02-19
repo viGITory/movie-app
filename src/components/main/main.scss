@@ -48,7 +48,22 @@
     }
   }
 
-  &__error {
+  &__error-wrapper {
+    grid-column: span 5;
+    justify-self: center;
+  }
+
+  &__error-image {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+  }
+
+  &__error-text {
+    margin: 0;
+
     text-align: center;
   }
 }

@@ -154,7 +154,10 @@ export default class Page {
     setTimeout(() => {
       if (result.status !== 200) {
         this.moviesContainer.innerHTML = `
-          <p class="main__error">Something went wrong :(</p>
+          <div class="main__error-wrapper">
+            <img class="main__error-image" src="./assets/popcorn-error.webp">
+            <p class="main__error-text">Something went wrong :(</p>
+          </div>
         `;
       }
 
