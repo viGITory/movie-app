@@ -8,6 +8,7 @@ interface IData {
 
 export default class Page {
   container: HTMLDivElement;
+  preloader!: HTMLDivElement;
   moviesContainer!: HTMLDivElement;
   searchInput!: HTMLInputElement;
 
@@ -34,6 +35,30 @@ export default class Page {
 
   private render = (): HTMLDivElement => {
     this.container.innerHTML = `
+      <div class="preloader">
+        <div class="preloader__inner">
+          <div class="preloader__square">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="preloader__square">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="preloader__square">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="preloader__square">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
       <div class="page__inner">
         <header class="header">
           <div class="container">
@@ -79,6 +104,9 @@ export default class Page {
   };
 
   private getElements = (): void => {
+    this.preloader = this.container.querySelector(
+      '.preloader'
+    ) as HTMLDivElement;
     this.moviesContainer = this.container.querySelector(
       '.main__movies'
     ) as HTMLDivElement;
@@ -109,9 +137,29 @@ export default class Page {
     this.buttons = [...this.container.querySelectorAll('[data-button]')];
   };
 
+  private hidePreloader = (): void => {
+    this.preloader.classList.add('hide');
+    this.moviesContainer.classList.remove('hide');
+  };
+
+  private showPreloader = (): void => {
+    this.preloader.classList.remove('hide');
+    this.moviesContainer.classList.add('hide');
+  };
+
   private getData = async (url: string) => {
     const result = await fetch(url);
     const data = await result.json();
+
+    setTimeout(() => {
+      if (result.status !== 200) {
+        this.moviesContainer.innerHTML = `
+          <p class="main__error">Something went wrong :(</p>
+        `;
+      }
+
+      this.hidePreloader();
+    }, 2000);
 
     return data;
   };
@@ -151,6 +199,7 @@ export default class Page {
           elem.classList.remove('active-btn');
         });
 
+        this.showPreloader();
         this.addMovies(this.currentRequest);
       }
     });
@@ -181,6 +230,7 @@ export default class Page {
           this.moviesContainer.innerHTML = '';
         }
 
+        this.showPreloader();
         this.addMovies(this.currentRequest);
       });
     });

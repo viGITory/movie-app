@@ -6,6 +6,7 @@
 
 @import "../components/visually-hidden/visually-hidden";
 @import "../components/container/container";
+@import "../components/preloader/preloader";
 
 @import "../components/page/page";
 @import "../components/header/header";
@@ -17,4 +18,9 @@
 .active-btn {
   border-color: transparent;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+}
+
+.hide {
+  z-index: -100;
+  opacity: 0;
 }
