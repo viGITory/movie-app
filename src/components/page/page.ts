@@ -264,6 +264,7 @@ export default class Page {
           item.classList.add('active-btn');
 
           this.pageCount = 1;
+          this.searchInput.value = '';
           this.moviesContainer.innerHTML = '';
         }
 
