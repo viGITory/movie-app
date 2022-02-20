@@ -1,21 +1,20 @@
 .preloader {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  bottom: -20px;
+  left: -20px;
   z-index: 100;
 
   background-color: #f5f5f5;
 }
 
 .preloader__inner {
-  position: absolute;
+  position: sticky;
   top: 50%;
   left: 50%;
   width: 172px;
   height: 128px;
-  margin: 0;
 
   transform: translate(-50%, -50%);
 }

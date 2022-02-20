@@ -30,14 +30,6 @@ export default class Page {
 
   private render = (): HTMLDivElement => {
     this.container.innerHTML = `
-      <div class="preloader">
-        <div class="preloader__inner">
-          <div class="preloader__square"><span></span><span></span><span></span></div>
-          <div class="preloader__square"><span></span><span></span><span></span></div>
-          <div class="preloader__square"><span></span><span></span><span></span></div>
-          <div class="preloader__square"><span></span><span></span><span></span></div>
-        </div>
-      </div>
       <div class="page__inner">
         <header class="header">
           <div class="container">
@@ -62,7 +54,17 @@ export default class Page {
                 <button class="main__button" type="button" data-button="tv-popular">Popular (TV)</button>
                 <button class="main__button" type="button" data-button="tv-top-rated">Top rated (TV)</button>
               </div>
-              <div class="main__movies"></div>
+              <div class="main__center">
+                <div class="preloader">
+                  <div class="preloader__inner">
+                    <div class="preloader__square"><span></span><span></span><span></span></div>
+                    <div class="preloader__square"><span></span><span></span><span></span></div>
+                    <div class="preloader__square"><span></span><span></span><span></span></div>
+                    <div class="preloader__square"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+                <div class="main__movies"></div>
+              </div>
               <button class="main__button" type="button" data-button="load">Load more</button>
             </div>
           </div>
@@ -122,12 +124,10 @@ export default class Page {
 
   private hidePreloader = (): void => {
     this.preloader.classList.add('hide');
-    this.moviesContainer.classList.remove('hide');
   };
 
   private showPreloader = (): void => {
     this.preloader.classList.remove('hide');
-    this.moviesContainer.classList.add('hide');
   };
 
   private getData = async (url: string) => {
