@@ -209,6 +209,10 @@ export default class Page {
   };
 
   private addListeners = (): void => {
+    document.addEventListener('keyup', (event: KeyboardEvent) => {
+      if (event.key === 'Escape') this.movieModal.classList.toggle('hide');
+    });
+
     document.addEventListener('click', (event) => {
       const target = event.target as HTMLElement;
 
