@@ -1,0 +1,24 @@
+.button {
+  padding: 10px;
+
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, .25);
+  border-radius: 6px;
+  outline: none;
+
+  transition: box-shadow .2s, border-color .2s;
+
+  &[data-button="load"] {
+    margin-top: auto;
+  }
+
+  &:hover {
+    border-color: transparent;
+    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  }
+}

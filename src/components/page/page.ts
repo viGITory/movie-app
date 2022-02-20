@@ -47,12 +47,12 @@ export default class Page {
             <h1 class="visually-hidden">Movie-app</h1>
             <div class="main__inner">
               <div class="main__top">
-                <button class="main__button active-btn" type="button" data-button="movie-popular">Popular</button>
-                <button class="main__button" type="button" data-button="movie-now-playing">Now playing</button>
-                <button class="main__button" type="button" data-button="movie-top-rated">Top rated</button>
-                <button class="main__button" type="button" data-button="movie-upcoming">Upcoming</button>
-                <button class="main__button" type="button" data-button="tv-popular">Popular (TV)</button>
-                <button class="main__button" type="button" data-button="tv-top-rated">Top rated (TV)</button>
+                <button class="button active-btn" type="button" data-button="movie-popular">Popular</button>
+                <button class="button" type="button" data-button="movie-now-playing">Now playing</button>
+                <button class="button" type="button" data-button="movie-top-rated">Top rated</button>
+                <button class="button" type="button" data-button="movie-upcoming">Upcoming</button>
+                <button class="button" type="button" data-button="tv-popular">Popular (TV)</button>
+                <button class="button" type="button" data-button="tv-top-rated">Top rated (TV)</button>
               </div>
               <div class="main__center">
                 <div class="preloader">
@@ -60,12 +60,11 @@ export default class Page {
                     <div class="preloader__square"><span></span><span></span><span></span></div>
                     <div class="preloader__square"><span></span><span></span><span></span></div>
                     <div class="preloader__square"><span></span><span></span><span></span></div>
-                    <div class="preloader__square"><span></span><span></span><span></span></div>
                   </div>
                 </div>
                 <div class="main__movies"></div>
               </div>
-              <button class="main__button" type="button" data-button="load">Load more</button>
+              <button class="button" type="button" data-button="load">Load more</button>
             </div>
           </div>
         </main>
