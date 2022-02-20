@@ -9,23 +9,30 @@
     row-gap: 20px;
   }
 
+  &__top,
+  &__movies {
+    justify-content: center;
+  }
+
   &__top {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 20px;
   }
 
   &__movies {
     display: grid;
+    width: 100%;
     grid-template-columns: repeat(auto-fill, 272px);
-    justify-content: center;
     gap: 20px;
   }
 
-  &__button {
+  &__button,
+  &__error-wrapper {
     padding: 10px;
+  }
 
+  &__button {
     font-family: inherit;
     font-size: inherit;
     color: inherit;
@@ -51,6 +58,9 @@
   &__error-wrapper {
     grid-column: span 5;
     justify-self: center;
+
+    border-radius: 10px;
+    box-shadow: -10px -10px 20px #fff, 10px 10px 20px rgb(0 0 0 / 25%);
   }
 
   &__error-image {
@@ -58,7 +68,7 @@
     max-width: 100%;
     margin-bottom: 10px;
 
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   &__error-text {
