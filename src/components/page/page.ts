@@ -144,6 +144,15 @@ export default class Page {
         `;
       }
 
+      if (!data.results.length) {
+        this.moviesContainer.innerHTML = `
+          <div class="main__error-wrapper">
+            <img class="main__error-image" src="./assets/popcorn-error.webp">
+            <p class="main__error-text">There are no movies for this keyword, try again</p>
+          </div>
+        `;
+      }
+
       this.hidePreloader();
     }, 2000);
 
