@@ -277,8 +277,11 @@ export default class Page {
 
     this.buttons.forEach((item) => {
       item.addEventListener('click', () => {
-        if (item === this.loadButton) this.pageCount++;
-        else if (item === this.movieNowPlayingButton)
+        if (item === this.loadButton) {
+          this.pageCount++;
+          this.showPreloader();
+          this.addMovies(this.currentRequest);
+        } else if (item === this.movieNowPlayingButton)
           this.currentRequest = `https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=`;
         else if (item === this.moviePopularButton)
           this.currentRequest = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
@@ -291,7 +294,10 @@ export default class Page {
         else if (item === this.tvTopRatedButton)
           this.currentRequest = `https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=`;
 
-        if (item !== this.loadButton) {
+        if (
+          item !== this.loadButton &&
+          !item.classList.contains('active-btn')
+        ) {
           this.buttons.forEach((elem) => {
             elem.classList.remove('active-btn');
           });
@@ -300,10 +306,10 @@ export default class Page {
           this.pageCount = 1;
           this.searchInput.value = '';
           this.moviesContainer.innerHTML = '';
-        }
 
-        this.showPreloader();
-        this.addMovies(this.currentRequest);
+          this.showPreloader();
+          this.addMovies(this.currentRequest);
+        }
       });
     });
   };
