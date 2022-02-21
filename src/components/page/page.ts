@@ -187,7 +187,7 @@ export default class Page {
         <div class="movie-modal__description-wrapper">
           <p class="movie-modal__description">${data.overview}</p>
           <p class="movie-modal__release">Release date: ${
-            data.release_date || data.first_air_date
+            data.release_date || data.first_air_date || ''
           }</p>
         </div>
       </div>
