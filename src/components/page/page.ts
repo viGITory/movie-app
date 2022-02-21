@@ -157,7 +157,10 @@ export default class Page {
         `;
       }
 
-      if (!data.results.length) {
+      if (
+        !data.results.length &&
+        this.moviesContainer.childNodes.length === 0
+      ) {
         this.moviesContainer.innerHTML = `
           <div class="main__error-wrapper">
             <img class="main__error-image" src="./assets/popcorn-error.webp">
