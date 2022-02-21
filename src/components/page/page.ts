@@ -6,14 +6,17 @@ export default class Page {
   moviesContainer!: HTMLDivElement;
   movieModal!: HTMLDivElement;
   searchInput!: HTMLInputElement;
+  searchMovieButton!: HTMLButtonElement;
+  searchTvButton!: HTMLButtonElement;
+  searchButtons!: Element[];
 
-  loadButton!: HTMLButtonElement;
   movieNowPlayingButton!: HTMLButtonElement;
   moviePopularButton!: HTMLButtonElement;
   movieTopRatedButton!: HTMLButtonElement;
   movieUpcomingButton!: HTMLButtonElement;
   tvPopulartButton!: HTMLButtonElement;
   tvTopRatedButton!: HTMLButtonElement;
+  loadButton!: HTMLButtonElement;
   buttons!: Element[];
 
   pageCount: number;
@@ -38,6 +41,10 @@ export default class Page {
               <div class="header__search">
                 <label class="visually-hidden" for="movie-search">Search movie</label>
                 <input class="header__input" type="search" id="movie-search" placeholder="Search movie" autocomplete="off" autofocus>
+                <div class="header__search-buttons">
+                  <button class="button active-btn" type="button" data-search="movie">Movie</button>
+                  <button class="button" type="button" data-search="tv">TV</button>
+                </div>
               </div>
             </div>
           </div>
@@ -97,6 +104,12 @@ export default class Page {
     this.searchInput = this.container.querySelector(
       '.header__input'
     ) as HTMLInputElement;
+    this.searchMovieButton = this.container.querySelector(
+      '[data-search=movie]'
+    ) as HTMLButtonElement;
+    this.searchTvButton = this.container.querySelector(
+      '[data-search=tv]'
+    ) as HTMLButtonElement;
     this.movieNowPlayingButton = this.container.querySelector(
       '[data-button=movie-now-playing]'
     ) as HTMLButtonElement;
@@ -118,6 +131,7 @@ export default class Page {
     this.loadButton = this.container.querySelector(
       '[data-button=load]'
     ) as HTMLButtonElement;
+    this.searchButtons = [...this.container.querySelectorAll('[data-search]')];
     this.buttons = [...this.container.querySelectorAll('[data-button]')];
   };
 
@@ -227,8 +241,15 @@ export default class Page {
 
     this.searchInput.addEventListener('change', () => {
       if (this.searchInput.value !== '') {
+        let currentCategory = '';
+
+        if (this.searchMovieButton.classList.contains('active-btn'))
+          currentCategory = 'movie';
+        else if (this.searchTvButton.classList.contains('active-btn'))
+          currentCategory = 'tv';
+
+        this.currentRequest = `https://api.themoviedb.org/3/search/${currentCategory}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
         this.pageCount = 1;
-        this.currentRequest = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
         this.moviesContainer.innerHTML = '';
 
         this.buttons.forEach((elem) => {
@@ -238,6 +259,20 @@ export default class Page {
         this.showPreloader();
         this.addMovies(this.currentRequest);
       }
+    });
+
+    this.searchButtons.forEach((item) => {
+      item.addEventListener('click', () => {
+        if (item === this.searchMovieButton) {
+          this.searchMovieButton.classList.add('active-btn');
+          this.searchTvButton.classList.remove('active-btn');
+          this.searchInput.placeholder = 'Search movie';
+        } else if (item === this.searchTvButton) {
+          this.searchTvButton.classList.add('active-btn');
+          this.searchMovieButton.classList.remove('active-btn');
+          this.searchInput.placeholder = 'Search TV';
+        }
+      });
     });
 
     this.buttons.forEach((item) => {

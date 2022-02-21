@@ -9,13 +9,17 @@
     );
   border-image-slice: 1;
 
-  &__inner {
+  &__inner,
+  &__search {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  &__inner {
     align-items: center;
     justify-content: space-between;
     padding: 10px 0;
-    gap: 10px;
   }
 
   &__logo,
@@ -34,6 +38,10 @@
     background-repeat: no-repeat;
     background-position: left top;
     background-size: auto 90%;
+  }
+
+  &__search-buttons {
+    display: flex;
   }
 
   &__input {

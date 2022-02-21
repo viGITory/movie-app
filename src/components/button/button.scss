@@ -13,6 +13,23 @@
 
   transition: box-shadow .2s, border-color .2s;
 
+  &[data-search="movie"],
+  &[data-search="tv"] {
+    display: block;
+  }
+
+  &[data-search="movie"] {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &[data-search="tv"] {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
   &[data-button="load"] {
     margin-top: auto;
   }
