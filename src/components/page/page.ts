@@ -2,11 +2,11 @@ import { IData } from '../../scripts/types';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import Preloader from '../preloader/preloader';
 import MovieModal from '../movie-modal/movie-modal';
 
 export default class Page {
   container: HTMLDivElement;
-  preloader!: HTMLDivElement;
   moviesContainer!: HTMLDivElement;
   searchInput!: HTMLInputElement;
   searchMovieButton!: HTMLButtonElement;
@@ -27,12 +27,14 @@ export default class Page {
   apiKey: string;
 
   header: Header;
+  preloader: Preloader;
   footer: Footer;
   movieModal: MovieModal;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
     this.header = new Header();
+    this.preloader = new Preloader();
     this.footer = new Footer();
     this.movieModal = new MovieModal();
 
@@ -58,13 +60,6 @@ export default class Page {
                 <button class="button" type="button" data-button="tv-top-rated">Top rated (TV)</button>
               </div>
               <div class="main__center">
-                <div class="preloader">
-                  <div class="preloader__inner">
-                    <div class="preloader__square"><span></span><span></span><span></span></div>
-                    <div class="preloader__square"><span></span><span></span><span></span></div>
-                    <div class="preloader__square"><span></span><span></span><span></span></div>
-                  </div>
-                </div>
                 <div class="main__movies"></div>
               </div>
               <button class="button" type="button" data-button="load">Load more</button>
@@ -79,9 +74,6 @@ export default class Page {
   };
 
   private getElements = (): void => {
-    this.preloader = this.container.querySelector(
-      '.preloader'
-    ) as HTMLDivElement;
     this.moviesContainer = this.container.querySelector(
       '.main__movies'
     ) as HTMLDivElement;
@@ -120,15 +112,11 @@ export default class Page {
   };
 
   private addComponents = (): void => {
+    this.moviesContainer.insertAdjacentElement(
+      'beforebegin',
+      this.preloader.render()
+    );
     this.container.append(this.movieModal.modalContainer);
-  };
-
-  private hidePreloader = (): void => {
-    this.preloader.classList.add('hide');
-  };
-
-  private showPreloader = (): void => {
-    this.preloader.classList.remove('hide');
   };
 
   private getData = async (url: string) => {
@@ -160,7 +148,7 @@ export default class Page {
       }
 
       document.body.classList.toggle('no-scroll');
-      this.hidePreloader();
+      this.preloader.hide();
     }, 2000);
 
     return data;
@@ -229,7 +217,7 @@ export default class Page {
           elem.classList.remove('active-btn');
         });
 
-        this.showPreloader();
+        this.preloader.show();
         this.addMovies(this.currentRequest);
       }
     });
@@ -252,7 +240,7 @@ export default class Page {
       item.addEventListener('click', () => {
         if (item === this.loadButton) {
           this.pageCount++;
-          this.showPreloader();
+          this.preloader.show();
           this.addMovies(this.currentRequest);
         } else if (item === this.movieNowPlayingButton)
           this.currentRequest = `https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=`;
@@ -280,7 +268,7 @@ export default class Page {
           this.searchInput.value = '';
           this.moviesContainer.innerHTML = '';
 
-          this.showPreloader();
+          this.preloader.show();
           this.addMovies(this.currentRequest);
         }
       });
