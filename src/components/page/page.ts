@@ -226,6 +226,15 @@ export default class Page {
 
     this.searchButtons.forEach((item) => {
       item.addEventListener('click', () => {
+        if (this.searchInput.value) {
+          if (item === this.searchMovieButton)
+            this.currentRequest = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+          else if (item === this.searchTvButton)
+            this.currentRequest = `https://api.themoviedb.org/3/search/tv?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+
+          this.showMovies();
+        }
+
         if (item === this.searchMovieButton) {
           this.searchMovieButton.classList.add('active-btn');
           this.searchTvButton.classList.remove('active-btn');
