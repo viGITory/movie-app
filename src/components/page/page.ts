@@ -119,6 +119,13 @@ export default class Page {
     this.container.append(this.movieModal.modalContainer);
   };
 
+  private showMovies = (): void => {
+    this.moviesContainer.innerHTML = '';
+    this.pageCount = 1;
+    this.preloader.show();
+    this.addMovies(this.currentRequest);
+  };
+
   private getData = async (url: string) => {
     document.body.classList.toggle('no-scroll');
 
@@ -210,15 +217,10 @@ export default class Page {
           currentCategory = 'tv';
 
         this.currentRequest = `https://api.themoviedb.org/3/search/${currentCategory}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
-        this.pageCount = 1;
-        this.moviesContainer.innerHTML = '';
-
+        this.showMovies();
         this.buttons.forEach((elem) => {
           elem.classList.remove('active-btn');
         });
-
-        this.preloader.show();
-        this.addMovies(this.currentRequest);
       }
     });
 
@@ -264,12 +266,8 @@ export default class Page {
           });
           item.classList.add('active-btn');
 
-          this.pageCount = 1;
           this.searchInput.value = '';
-          this.moviesContainer.innerHTML = '';
-
-          this.preloader.show();
-          this.addMovies(this.currentRequest);
+          this.showMovies();
         }
       });
     });
