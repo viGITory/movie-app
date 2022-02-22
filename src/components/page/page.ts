@@ -1,12 +1,13 @@
 import { IData } from '../../scripts/types';
+
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import MovieModal from '../movie-modal/movie-modal';
 
 export default class Page {
   container: HTMLDivElement;
   preloader!: HTMLDivElement;
   moviesContainer!: HTMLDivElement;
-  movieModal!: HTMLDivElement;
   searchInput!: HTMLInputElement;
   searchMovieButton!: HTMLButtonElement;
   searchTvButton!: HTMLButtonElement;
@@ -27,11 +28,13 @@ export default class Page {
 
   header: Header;
   footer: Footer;
+  movieModal: MovieModal;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
     this.header = new Header();
     this.footer = new Footer();
+    this.movieModal = new MovieModal();
 
     this.pageCount = 1;
     this.apiKey = '48fa0c325cf33db96de5b585427f9aa1';
@@ -82,9 +85,6 @@ export default class Page {
     this.moviesContainer = this.container.querySelector(
       '.main__movies'
     ) as HTMLDivElement;
-    this.movieModal = this.container.querySelector(
-      '.movie-modal'
-    ) as HTMLDivElement;
     this.searchInput = this.container.querySelector(
       '.header__input'
     ) as HTMLInputElement;
@@ -117,6 +117,10 @@ export default class Page {
     ) as HTMLButtonElement;
     this.searchButtons = [...this.container.querySelectorAll('[data-search]')];
     this.buttons = [...this.container.querySelectorAll('[data-button]')];
+  };
+
+  private addComponents = (): void => {
+    this.container.append(this.movieModal.modalContainer);
   };
 
   private hidePreloader = (): void => {
@@ -162,27 +166,6 @@ export default class Page {
     return data;
   };
 
-  private renderModal = (data: IData): HTMLDivElement => {
-    this.movieModal.innerHTML = `
-      <div class="movie-modal__inner">
-        <h3 class="movie-modal__title">${data.title || data.name}</h3>
-        <div class="movie-modal__poster-wrapper">
-          <img class="movie-modal__poster" src="https://image.tmdb.org/t/p/w1280${
-            data.backdrop_path
-          }" alt="Movie poster">
-        </div>
-        <div class="movie-modal__description-wrapper">
-          <p class="movie-modal__description">${data.overview}</p>
-          <p class="movie-modal__release">Release date: ${
-            data.release_date || data.first_air_date || ''
-          }</p>
-        </div>
-      </div>
-    `;
-
-    return this.movieModal;
-  };
-
   private addMovies = async (url: string): Promise<void> => {
     try {
       const data = await this.getData(url + this.pageCount);
@@ -202,8 +185,8 @@ export default class Page {
         `;
 
         movie.addEventListener('click', () => {
-          this.renderModal(item);
-          this.movieModal.classList.toggle('hide');
+          this.movieModal.render(item);
+          this.movieModal.show();
         });
 
         this.moviesContainer.append(movie);
@@ -213,7 +196,7 @@ export default class Page {
 
   private addListeners = (): void => {
     document.addEventListener('keyup', (event: KeyboardEvent) => {
-      if (event.key === 'Escape') this.movieModal.classList.toggle('hide');
+      if (event.key === 'Escape') this.movieModal.hide();
     });
 
     document.addEventListener('click', (event) => {
@@ -225,7 +208,7 @@ export default class Page {
           .contains(target) &&
         !target.classList.contains('movie')
       ) {
-        this.movieModal.classList.add('hide');
+        this.movieModal.hide();
       }
     });
 
@@ -307,6 +290,7 @@ export default class Page {
   public init = (): void => {
     this.render();
     this.getElements();
+    this.addComponents();
     this.addMovies(this.currentRequest);
     this.addListeners();
   };
