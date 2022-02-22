@@ -13,9 +13,10 @@ export default class MovieModal {
       <div class="movie-modal__inner">
         <h3 class="movie-modal__title">${data.title || data.name}</h3>
         <div class="movie-modal__poster-wrapper">
-          <img class="movie-modal__poster" src="https://image.tmdb.org/t/p/w1280${
+          <div class="movie-modal__poster" style="background-image: url(https://image.tmdb.org/t/p/w1280${
             data.backdrop_path
-          }" alt="Movie poster">
+          })">
+          </div>
         </div>
         <div class="movie-modal__description-wrapper">
           <p class="movie-modal__description">${data.overview}</p>

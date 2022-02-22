@@ -60,6 +60,7 @@ export default class Page {
                 <button class="button" type="button" data-button="tv-top-rated">Top rated (TV)</button>
               </div>
               <div class="main__center">
+                <h2 class="visually-hidden">Movies/TV</h2>
                 <div class="main__movies"></div>
               </div>
               <button class="button" type="button" data-button="load">Load more</button>
@@ -172,9 +173,10 @@ export default class Page {
         movie.innerHTML = `
           <h3 class="movie__title">${item.title || item.name}</h3>
           <div class="movie__poster-wrapper">
-            <img class="movie__poster" src="https://image.tmdb.org/t/p/w1280${
+            <div class="movie__poster" style="background-image: url(https://image.tmdb.org/t/p/w1280${
               item.poster_path
-            }" alt="Movie poster">
+            })">
+            </div>
           </div>
           <p class="movie__rate">${item.vote_average}</p>
         `;

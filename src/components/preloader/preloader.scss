@@ -11,12 +11,12 @@
 
 .preloader__inner {
   position: sticky;
-  top: 50%;
+  top: calc(50% - 64px);
   left: 50%;
-  width: 172px;
+  width: 128px;
   height: 128px;
 
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 }
 
 .preloader__square {
