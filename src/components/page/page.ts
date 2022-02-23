@@ -218,6 +218,7 @@ export default class Page {
         else if (this.searchTvButton.classList.contains('active-btn'))
           currentCategory = 'tv';
 
+        this.searchInput.value = this.searchInput.value.trim();
         this.currentRequest = `https://api.themoviedb.org/3/search/${currentCategory}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
         this.showMovies();
         this.buttons.forEach((elem) => {
