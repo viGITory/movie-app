@@ -1,7 +1,4 @@
-:root {
-  --scroll-width: 10px;
-}
-
+@import "./variables";
 @import "./fonts";
 
 @import "../components/visually-hidden/visually-hidden";
@@ -20,7 +17,7 @@
 // ### JS ###
 .active-btn {
   border-color: transparent;
-  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+  box-shadow: $inner-shadow;
 }
 
 .hide {

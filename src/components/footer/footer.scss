@@ -1,12 +1,6 @@
 .footer {
   border-top: 1px solid transparent;
-  border-image:
-    linear-gradient(
-      to right,
-      transparent,
-      rgba(0, 0, 0, .25) 50%,
-      transparent 100%
-    );
+  border-image: $border-image;
   border-image-slice: 1;
 
   &__inner {
@@ -24,11 +18,11 @@
     color: inherit;
     text-decoration: none;
 
-    border-radius: 6px;
+    border-radius: $small-radius;
     transition: box-shadow .2s;
 
     &:hover {
-      box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+      box-shadow: $inner-shadow;
     }
   }
 }

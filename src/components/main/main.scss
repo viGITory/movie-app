@@ -40,8 +40,8 @@
     grid-column: span 5;
     justify-self: center;
 
-    border-radius: 10px;
-    box-shadow: -10px -10px 20px #fff, 10px 10px 20px rgb(0 0 0 / 25%);
+    border-radius: $big-radius;
+    box-shadow: $outer-shadow;
   }
 
   &__error-image {
@@ -49,7 +49,7 @@
     max-width: 100%;
     margin-bottom: 10px;
 
-    border-radius: 8px;
+    border-radius: $middle-radius;
   }
 
   &__error-text {

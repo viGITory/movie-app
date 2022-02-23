@@ -6,9 +6,9 @@
   min-height: 398px;
 
   cursor: pointer;
-  border: 10px solid #f5f5f5;
-  border-radius: 10px;
-  box-shadow: -5px -5px 10px #fff, 5px 5px 10px rgba(0, 0, 0, .25);
+  border: 10px solid $primary-light;
+  border-radius: $big-radius;
+  box-shadow: $outer-shadow;
 
   transition: box-shadow .2s;
 
@@ -32,9 +32,9 @@
 
     text-align: center;
 
-    background-color: #f5f5f5;
-    border-radius: 6px;
-    box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #fff;
+    background-color: $primary-light;
+    border-radius: $small-radius;
+    box-shadow: $inner-shadow;
   }
 
   &__title {
@@ -70,22 +70,22 @@
 
       font-size: 40px;
       line-height: 378px;
-      color: #f5f5f5;
+      color: $primary-light;
       text-align: center;
 
       content: "More info";
-      background-color: rgba(0, 0, 0, .6);
-      border-radius: 8px;
+      background-color: $middle-transparent;
+      border-radius: $middle-radius;
       opacity: 0;
       transition: opacity .2s;
     }
   }
 
   &__poster {
-    background-color: rgba(0, 0, 0, .25);
+    background-color: $light-transparent;
     background-blend-mode: multiply;
     background-size: cover;
-    border-radius: 8px;
+    border-radius: $middle-radius;
   }
 
   &__rate {
