@@ -228,7 +228,7 @@ export default class Page {
 
     this.searchButtons.forEach((item) => {
       item.addEventListener('click', () => {
-        if (this.searchInput.value) {
+        if (this.searchInput.value && !item.classList.contains('active-btn')) {
           if (item === this.searchMovieButton)
             this.currentRequest = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
           else if (item === this.searchTvButton)
