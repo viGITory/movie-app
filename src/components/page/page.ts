@@ -3,6 +3,7 @@ import { IData } from '../../scripts/types';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Preloader from '../preloader/preloader';
+import Movie from '../movie/movie';
 import MovieModal from '../movie-modal/movie-modal';
 
 export default class Page {
@@ -164,19 +165,7 @@ export default class Page {
       const data = await this.getData(url + this.pageCount);
 
       data.results.forEach((item: IData) => {
-        let movie = document.createElement('article');
-        movie.classList.add('movie');
-
-        movie.innerHTML = `
-          <h3 class="movie__title">${item.title || item.name}</h3>
-          <div class="movie__poster-wrapper">
-            <div class="movie__poster" style="background-image: url(https://image.tmdb.org/t/p/w1280${
-              item.poster_path
-            })">
-            </div>
-          </div>
-          <p class="movie__rate">${item.vote_average}</p>
-        `;
+        const movie = new Movie().render(item);
 
         movie.addEventListener('click', () => {
           this.movieModal.render(item);
