@@ -23,10 +23,10 @@
 
   &__logo {
     padding-left: 40px;
+
     font-size: 39px;
     line-height: 1;
     text-decoration: none;
-    text-transform: uppercase;
 
     background-image: url("./../assets/svg/popcorn-smile.svg");
     background-repeat: no-repeat;
@@ -34,12 +34,16 @@
     background-size: auto 90%;
   }
 
+  &__logo-short {
+    color: $light-transparent;
+  }
+
   &__search-buttons {
     display: flex;
   }
 
   &__input {
-    width: 272px;
+    width: 276px;
     padding: 10px;
 
     font-family: inherit;
@@ -50,5 +54,9 @@
     border-radius: $small-radius;
     outline: none;
     box-shadow: $inner-shadow;
+
+    &::placeholder {
+      color: $middle-transparent;
+    }
   }
 }

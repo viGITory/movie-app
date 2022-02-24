@@ -128,8 +128,6 @@ export default class Page {
   };
 
   private getData = async (url: string) => {
-    document.body.classList.toggle('no-scroll');
-
     const result = await fetch(url);
     const data = await result.json();
 
@@ -155,7 +153,6 @@ export default class Page {
         `;
       }
 
-      document.body.classList.toggle('no-scroll');
       this.preloader.hide();
     }, 2000);
 

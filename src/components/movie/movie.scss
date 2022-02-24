@@ -2,8 +2,9 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-width: 272px;
-  min-height: 398px;
+  min-width: 276px;
+  min-height: 404px;
+  gap: 10px;
 
   cursor: pointer;
   border: 10px solid $primary-light;
@@ -69,7 +70,7 @@
       height: 100%;
 
       font-size: 40px;
-      line-height: 378px;
+      line-height: 404px;
       color: $primary-light;
       text-align: center;
 

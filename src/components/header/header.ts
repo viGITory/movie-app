@@ -4,7 +4,7 @@ export default class Header {
       <header class="header">
         <div class="container">
           <div class="header__inner">
-            <a class="header__logo" href="index.html">Movie app</a>
+            <a class="header__logo" href="index.html">Movie<span class="header__logo-short">App</span></a>
             <div class="header__search">
               <label class="visually-hidden" for="movie-search">Search movie</label>
               <input class="header__input" type="search" id="movie-search" placeholder="Search movie" autocomplete="off" autofocus>

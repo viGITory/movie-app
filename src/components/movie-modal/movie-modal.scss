@@ -21,8 +21,9 @@
 
   &__inner {
     position: relative;
-    min-width: 272px;
-    max-width: 856px;
+    width: calc(100% - 20px);
+    min-width: 276px;
+    max-width: 868px;
     margin: auto;
 
     border-radius: $big-radius;
