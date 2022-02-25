@@ -12,7 +12,7 @@ export default class Movie {
     this.container.innerHTML = `
       <h3 class="movie__title">${item.title || item.name}</h3>
       <div class="movie__poster-wrapper">
-        <div class="movie__poster" style="background-image: url(https://image.tmdb.org/t/p/w1280${
+        <div class="movie__poster" style="background-image: url(https://image.tmdb.org/t/p/w780${
           item.poster_path
         })">
         </div>

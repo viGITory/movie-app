@@ -18,36 +18,32 @@ export default class Page {
   moviePopularButton!: HTMLButtonElement;
   movieTopRatedButton!: HTMLButtonElement;
   movieUpcomingButton!: HTMLButtonElement;
-  tvPopulartButton!: HTMLButtonElement;
+  tvPopularButton!: HTMLButtonElement;
   tvTopRatedButton!: HTMLButtonElement;
   loadButton!: HTMLButtonElement;
   buttons!: Element[];
 
   pageCount: number;
-  currentRequest: string;
+  currentUrl: string;
   apiKey: string;
 
-  header: Header;
   preloader: Preloader;
-  footer: Footer;
   movieModal: MovieModal;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
-    this.header = new Header();
     this.preloader = new Preloader();
-    this.footer = new Footer();
     this.movieModal = new MovieModal();
 
     this.pageCount = 1;
     this.apiKey = '48fa0c325cf33db96de5b585427f9aa1';
-    this.currentRequest = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
+    this.currentUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
   }
 
   private render = (): HTMLDivElement => {
     this.container.innerHTML = `
       <div class="page__inner">
-        ${this.header.render()}
+        ${new Header().render()}
         <main class="main">
           <div class="container">
             <h1 class="visually-hidden">Movie-app</h1>
@@ -68,7 +64,7 @@ export default class Page {
             </div>
           </div>
         </main>
-        ${this.footer.render()}
+        ${new Footer().render()}
       </div>
     `;
 
@@ -100,7 +96,7 @@ export default class Page {
     this.movieUpcomingButton = this.container.querySelector(
       '[data-button=movie-upcoming]'
     ) as HTMLButtonElement;
-    this.tvPopulartButton = this.container.querySelector(
+    this.tvPopularButton = this.container.querySelector(
       '[data-button=tv-popular]'
     ) as HTMLButtonElement;
     this.tvTopRatedButton = this.container.querySelector(
@@ -125,7 +121,7 @@ export default class Page {
     this.moviesContainer.innerHTML = '';
     this.pageCount = 1;
     this.preloader.show();
-    this.addMovies(this.currentRequest);
+    this.addMovies(this.currentUrl);
   };
 
   private getData = async (url: string) => {
@@ -143,7 +139,7 @@ export default class Page {
       }
 
       if (
-        !data.results.length &&
+        !data.results?.length &&
         this.moviesContainer.childNodes.length === 0
       ) {
         this.moviesContainer.innerHTML = `
@@ -182,7 +178,7 @@ export default class Page {
       if (event.key === 'Escape') this.movieModal.hide();
     });
 
-    document.addEventListener('click', (event) => {
+    document.addEventListener('click', (event: MouseEvent) => {
       const target = event.target as HTMLElement;
 
       if (!target.matches('.movie-modal__inner, .movie-modal__inner *')) {
@@ -200,7 +196,7 @@ export default class Page {
           currentCategory = 'tv';
 
         this.searchInput.value = this.searchInput.value.trim();
-        this.currentRequest = `https://api.themoviedb.org/3/search/${currentCategory}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+        this.currentUrl = `https://api.themoviedb.org/3/search/${currentCategory}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
         this.showMovies();
         this.buttons.forEach((elem) => {
           elem.classList.remove('active-btn');
@@ -212,9 +208,9 @@ export default class Page {
       item.addEventListener('click', () => {
         if (this.searchInput.value && !item.classList.contains('active-btn')) {
           if (item === this.searchMovieButton)
-            this.currentRequest = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+            this.currentUrl = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
           else if (item === this.searchTvButton)
-            this.currentRequest = `https://api.themoviedb.org/3/search/tv?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+            this.currentUrl = `https://api.themoviedb.org/3/search/tv?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
 
           this.showMovies();
         }
@@ -236,19 +232,19 @@ export default class Page {
         if (item === this.loadButton) {
           this.pageCount++;
           this.preloader.show();
-          this.addMovies(this.currentRequest);
+          this.addMovies(this.currentUrl);
         } else if (item === this.movieNowPlayingButton)
-          this.currentRequest = `https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=`;
+          this.currentUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${this.apiKey}&language=en-US&page=`;
         else if (item === this.moviePopularButton)
-          this.currentRequest = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
+          this.currentUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
         else if (item === this.movieTopRatedButton)
-          this.currentRequest = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=`;
+          this.currentUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${this.apiKey}&language=en-US&page=`;
         else if (item === this.movieUpcomingButton)
-          this.currentRequest = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US&page=`;
-        else if (item === this.tvPopulartButton)
-          this.currentRequest = `https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}&language=en-US&page=`;
+          this.currentUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=${this.apiKey}&language=en-US&page=`;
+        else if (item === this.tvPopularButton)
+          this.currentUrl = `https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}&language=en-US&page=`;
         else if (item === this.tvTopRatedButton)
-          this.currentRequest = `https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=`;
+          this.currentUrl = `https://api.themoviedb.org/3/tv/top_rated?api_key=${this.apiKey}&language=en-US&page=`;
 
         if (
           item !== this.loadButton &&
@@ -270,7 +266,7 @@ export default class Page {
     this.render();
     this.getElements();
     this.addComponents();
-    this.addMovies(this.currentRequest);
+    this.addMovies(this.currentUrl);
     this.addListeners();
   };
 }
