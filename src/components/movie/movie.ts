@@ -1,4 +1,4 @@
-import { IData } from '../../scripts/types';
+import { IMovieData } from '../../scripts/types';
 
 export default class Movie {
   container: HTMLElement;
@@ -8,7 +8,7 @@ export default class Movie {
     this.container.classList.add('movie');
   }
 
-  public render = (item: IData): HTMLElement => {
+  public render = (item: IMovieData): HTMLElement => {
     this.container.innerHTML = `
       <h3 class="movie__title">${item.title || item.name}</h3>
       <div class="movie__poster-wrapper">

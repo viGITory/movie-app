@@ -1,4 +1,4 @@
-export interface IData {
+export interface IMovieData {
   first_air_date: string;
   release_date: string;
   backdrop_path: string;

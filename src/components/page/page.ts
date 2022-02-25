@@ -1,4 +1,4 @@
-import { IData } from '../../scripts/types';
+import { IMovieData } from '../../scripts/types';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
@@ -164,7 +164,7 @@ export default class Page {
     try {
       const data = await this.getData(url + this.pageCount);
 
-      data.results.forEach((item: IData) => {
+      data.results.forEach((item: IMovieData) => {
         const movie = new Movie().render(item);
 
         movie.addEventListener('click', () => {
