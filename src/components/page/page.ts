@@ -181,7 +181,11 @@ export default class Page {
     document.addEventListener('click', (event: MouseEvent) => {
       const target = event.target as HTMLElement;
 
-      if (!target.matches('.movie-modal__inner, .movie-modal__inner *')) {
+      if (
+        !target.matches(
+          '.movie, .movie *, .movie-modal__inner, .movie-modal__inner *'
+        )
+      )
         this.movieModal.hide();
       }
     });
