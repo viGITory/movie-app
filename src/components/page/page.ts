@@ -60,7 +60,7 @@ export default class Page {
                 <h2 class="visually-hidden">Movies/TV</h2>
                 <div class="main__movies"></div>
               </div>
-              <button class="button" type="button" data-button="load">Load more</button>
+              <button class="button" type="button" data-type="load">Load more</button>
             </div>
           </div>
         </main>
@@ -103,7 +103,7 @@ export default class Page {
       '[data-button=tv-top-rated]'
     ) as HTMLButtonElement;
     this.loadButton = this.container.querySelector(
-      '[data-button=load]'
+      '[data-type=load]'
     ) as HTMLButtonElement;
     this.searchButtons = [...this.container.querySelectorAll('[data-search]')];
     this.buttons = [...this.container.querySelectorAll('[data-button]')];
@@ -263,6 +263,12 @@ export default class Page {
           this.showMovies();
         }
       });
+    });
+
+    this.loadButton.addEventListener('click', () => {
+      this.pageCount++;
+      this.preloader.show();
+      this.addMovies(this.currentUrl);
     });
   };
 
