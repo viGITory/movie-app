@@ -22,15 +22,17 @@ export default class Page {
   pageCount: number;
   currentUrl: string;
   apiKey: string;
+  currentType: string;
 
   constructor() {
     this.container = document.getElementById('root') as HTMLDivElement;
     this.preloader = new Preloader();
     this.movieModal = new MovieModal();
 
+    this.currentType = 'movie';
     this.pageCount = 1;
     this.apiKey = '48fa0c325cf33db96de5b585427f9aa1';
-    this.currentUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${this.apiKey}&language=en-US&page=`;
+    this.currentUrl = `https://api.themoviedb.org/3/${this.currentType}/popular?api_key=${this.apiKey}&language=en-US&page=`;
   }
 
   private render = (): HTMLDivElement => {
@@ -138,8 +140,15 @@ export default class Page {
       data.results.forEach((item: IMovieData) => {
         const movie = new Movie().render(item);
 
-        movie.addEventListener('click', () => {
-          this.movieModal.render(item);
+        movie.addEventListener('click', async () => {
+          const actors = await this.getData(
+            `https://api.themoviedb.org/3/${this.currentType}/${item.id}/credits?api_key=${this.apiKey}&language=en-US`
+          );
+          const videos = await this.getData(
+            `https://api.themoviedb.org/3/${this.currentType}/${item.id}/videos?api_key=${this.apiKey}&language=en-US`
+          );
+
+          this.movieModal.render(item, actors, videos);
           this.movieModal.show();
         });
 
@@ -168,11 +177,13 @@ export default class Page {
       if (this.searchInput.value !== '') {
         this.searchInput.value = this.searchInput.value.trim();
 
-        if (this.searchMovieButton.classList.contains('active-btn'))
-          this.currentUrl = `https://api.themoviedb.org/3/search/movie?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
-        else if (this.searchTvButton.classList.contains('active-btn'))
-          this.currentUrl = `https://api.themoviedb.org/3/search/tv?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+        if (this.searchMovieButton.classList.contains('active-btn')) {
+          this.currentType = 'movie';
+        } else if (this.searchTvButton.classList.contains('active-btn')) {
+          this.currentType = 'tv';
+        }
 
+        this.currentUrl = `https://api.themoviedb.org/3/search/${this.currentType}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
         this.showMovies();
 
         this.categoryButtons.forEach((elem) => {
@@ -183,8 +194,10 @@ export default class Page {
 
     this.searchButtons.forEach((item) => {
       item.addEventListener('click', () => {
+        this.currentType = `${item.dataset['search']}`;
+
         if (this.searchInput.value && !item.classList.contains('active-btn')) {
-          this.currentUrl = `https://api.themoviedb.org/3/search/${item.dataset['search']}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+          this.currentUrl = `https://api.themoviedb.org/3/search/${this.currentType}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
           this.showMovies();
         }
 
@@ -203,6 +216,7 @@ export default class Page {
     this.categoryButtons.forEach((item) => {
       item.addEventListener('click', () => {
         this.currentUrl = `https://api.themoviedb.org/3/${item.dataset['type']}/${item.dataset['category']}?api_key=${this.apiKey}&language=en-US&page=`;
+        this.currentType = `${item.dataset['type']}`;
 
         if (!item.classList.contains('active-btn')) {
           this.categoryButtons.forEach((elem) => {
