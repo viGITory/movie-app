@@ -31,8 +31,16 @@
 
   &__title,
   &__description,
+  &__genre,
   &__release {
     margin: 0;
+  }
+
+  &__title,
+  &__genre,
+  &__youtube,
+  &__actor {
+    border-radius: $small-radius;
   }
 
   &__title {
@@ -45,7 +53,6 @@
     font-size: inherit;
     font-weight: 400;
 
-    border-radius: $small-radius;
     box-shadow: $inner-shadow;
   }
 
@@ -55,7 +62,8 @@
   }
 
   &__poster-wrapper,
-  &__poster {
+  &__poster,
+  &__actor {
     background-repeat: no-repeat;
     background-position: center;
   }
@@ -65,28 +73,43 @@
     background-size: 30% auto;
   }
 
-  &__poster {
-    padding-bottom: 56.22%;
-
+  &__poster,
+  &__actor {
     background-color: $light-transparent;
     background-size: cover;
-    border-radius: $middle-radius;
     background-blend-mode: multiply;
+  }
+
+  &__poster,
+  &__description-wrapper {
+    border-radius: $middle-radius;
+  }
+
+  &__poster {
+    padding-bottom: 56.22%;
   }
 
   &__description-wrapper {
     padding: 10px;
-
-    border-radius: $middle-radius;
     box-shadow: $inner-shadow;
   }
 
-  &__description {
-    padding-bottom: 10px;
+  &__genres-wrapper,
+  &__cast {
+    gap: 5px;
+  }
 
-    border-bottom: 1px solid transparent;
-    border-image: $border-image;
-    border-image-slice: 1;
+  &__genres-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  &__genre,
+  &__youtube {
+    padding: 5px 10px;
+
+    border: 1px solid $light-transparent;
   }
 
   &__bottom,
@@ -99,6 +122,11 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 10px;
+    padding-top: 10px;
+
+    border-top: 1px solid transparent;
+    border-image: $border-image;
+    border-image-slice: 1;
   }
 
   &__release {
@@ -107,13 +135,10 @@
 
   &__youtube {
     display: inline-block;
-    padding: 5px 10px;
 
     color: inherit;
     text-decoration: none;
 
-    border: 1px solid $light-transparent;
-    border-radius: $small-radius;
     transition: background-color .2s, color .2s, border-color .2s;
 
     &:hover {
@@ -125,7 +150,6 @@
   }
 
   &__cast {
-    gap: 5px;
     margin-left: auto;
   }
 
@@ -133,12 +157,6 @@
     width: 48px;
     height: 48px;
 
-    background-color: $light-transparent;
     background-image: url("./../assets/svg/no-image.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    border-radius: $small-radius;
-    background-blend-mode: multiply;
   }
 }

@@ -30,3 +30,11 @@ export interface IVideos {
 export interface IVideoData {
   key: string;
 }
+
+export interface IGenres {
+  genres: IGenresData[];
+}
+
+export interface IGenresData {
+  name: string;
+}

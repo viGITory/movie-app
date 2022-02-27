@@ -147,8 +147,11 @@ export default class Page {
           const videos = await this.getData(
             `https://api.themoviedb.org/3/${this.currentType}/${item.id}/videos?api_key=${this.apiKey}&language=en-US`
           );
+          const genres = await this.getData(
+            `https://api.themoviedb.org/3/${this.currentType}/${item.id}?api_key=${this.apiKey}&language=en-US`
+          );
 
-          this.movieModal.render(item, actors, videos);
+          this.movieModal.render(item, actors, videos, genres);
           this.movieModal.show();
         });
 

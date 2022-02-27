@@ -1,4 +1,4 @@
-import { IMovieData, IActors, IVideos } from '../../scripts/types';
+import { IMovieData, IActors, IVideos, IGenres } from '../../scripts/types';
 
 export default class MovieModal {
   container: HTMLDivElement;
@@ -14,7 +14,8 @@ export default class MovieModal {
   public render = (
     movieData: IMovieData,
     actors: IActors,
-    videos: IVideos
+    videos: IVideos,
+    genres: IGenres
   ): void => {
     const actorsCast = actors.cast
       .filter((item) => item.profile_path !== null)
@@ -24,6 +25,15 @@ export default class MovieModal {
         `;
       })
       .slice(0, 5)
+      .join('');
+
+    const genresList = genres.genres
+      .map((item) => {
+        return `
+          <p class="movie-modal__genre">${item.name}</p>
+        `;
+      })
+      .slice(0, 3)
       .join('');
 
     this.container.innerHTML = `
@@ -37,6 +47,7 @@ export default class MovieModal {
         </div>
         <div class="movie-modal__description-wrapper">
           <p class="movie-modal__description">${movieData.overview}</p>
+          <div class="movie-modal__genres-wrapper">${genresList}</div>
           <div class="movie-modal__bottom">
             <div>
               <p class="movie-modal__release">Release date: ${
