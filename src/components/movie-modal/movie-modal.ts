@@ -50,9 +50,9 @@ export default class MovieModal {
           <div class="movie-modal__genres-wrapper">${genresList}</div>
           <div class="movie-modal__bottom">
             <div>
-              <p class="movie-modal__release">Release date: ${
+              <p class="movie-modal__release">Release date: ${this.formatDate(
                 movieData.release_date || movieData.first_air_date || ''
-              }</p>
+              )}</p>
               <a class="movie-modal__youtube" href="https://www.youtube.com/watch?v=${
                 videos.results[0]?.key || this.specialVideoKey
               }" target="_blank">YouTube</a>
@@ -67,6 +67,10 @@ export default class MovieModal {
   get modalContainer(): HTMLDivElement {
     return this.container;
   }
+
+  private formatDate = (date: string): string => {
+    return date.split('-').reverse().join('/');
+  };
 
   public show = (): void => {
     this.container.classList.remove('hide');
