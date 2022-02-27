@@ -33,12 +33,9 @@
   }
 
   &__error-wrapper {
-    padding: 10px;
-  }
-
-  &__error-wrapper {
     grid-column: span 5;
     justify-self: center;
+    padding: 10px;
 
     border-radius: $big-radius;
     box-shadow: $outer-shadow;

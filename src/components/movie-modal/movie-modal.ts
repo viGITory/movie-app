@@ -49,8 +49,8 @@ export default class MovieModal {
           <p class="movie-modal__description">${movieData.overview}</p>
           <div class="movie-modal__genres-wrapper">${genresList}</div>
           <div class="movie-modal__bottom">
-            <div>
-              <p class="movie-modal__release">Release date: ${this.formatDate(
+            <div class="movie-modal__release">
+              <p class="movie-modal__release-date">Release date: ${this.formatDate(
                 movieData.release_date || movieData.first_air_date || ''
               )}</p>
               <a class="movie-modal__youtube" href="https://www.youtube.com/watch?v=${

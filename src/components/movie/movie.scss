@@ -39,6 +39,8 @@
   }
 
   &__title {
+    padding: 5px 10px;
+
     font-size: inherit;
     font-weight: 400;
   }
@@ -69,8 +71,8 @@
       width: 100%;
       height: 100%;
 
-      font-size: 40px;
-      line-height: 404px;
+      font-size: 32px;
+      line-height: 384px;
       color: $primary-light;
       text-align: center;
 

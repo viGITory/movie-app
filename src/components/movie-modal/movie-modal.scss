@@ -14,9 +14,12 @@
   &__inner,
   &__title {
     box-sizing: border-box;
-    padding: 10px;
-
     background-color: $primary-light;
+  }
+
+  &__inner,
+  &__description-wrapper {
+    padding: 10px;
   }
 
   &__inner {
@@ -32,7 +35,7 @@
   &__title,
   &__description,
   &__genre,
-  &__release {
+  &__release-date {
     margin: 0;
   }
 
@@ -43,21 +46,31 @@
     border-radius: $small-radius;
   }
 
+  &__title,
+  &__genre,
+  &__youtube {
+    padding: 5px 10px;
+  }
+
+  &__title,
+  &__description-wrapper {
+    box-shadow: $inner-shadow;
+  }
+
   &__title {
     position: absolute;
     top: 20px;
-    left: 20px;
+    right: 20px;
     z-index: 1;
     max-width: calc(100% - 40px);
 
     font-size: inherit;
     font-weight: 400;
-
-    box-shadow: $inner-shadow;
   }
 
   &__poster-wrapper,
-  &__description {
+  &__description,
+  &__genres-wrapper {
     margin-bottom: 10px;
   }
 
@@ -89,39 +102,28 @@
     padding-bottom: 56.22%;
   }
 
-  &__description-wrapper {
-    padding: 10px;
-    box-shadow: $inner-shadow;
-  }
-
   &__genres-wrapper,
   &__cast {
     gap: 5px;
   }
 
-  &__genres-wrapper {
+  &__genres-wrapper,
+  &__bottom,
+  &__cast {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 10px;
   }
 
   &__genre,
   &__youtube {
-    padding: 5px 10px;
-
+    font-size: 14px;
     border: 1px solid $light-transparent;
   }
 
-  &__bottom,
-  &__cast {
-    display: flex;
-    justify-content: space-between;
-  }
-
   &__bottom {
-    flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 5px;
     padding-top: 10px;
 
     border-top: 1px solid transparent;
@@ -130,6 +132,10 @@
   }
 
   &__release {
+    flex-grow: 1;
+  }
+
+  &__release-date {
     margin-bottom: 5px;
   }
 
@@ -149,14 +155,8 @@
     }
   }
 
-  &__cast {
-    margin-left: auto;
-  }
-
   &__actor {
     width: 48px;
     height: 48px;
-
-    background-image: url("./../assets/svg/no-image.svg");
   }
 }
