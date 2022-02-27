@@ -1,0 +1,26 @@
+{
+  "name": "MovieApp",
+  "short_name": "MovieApp",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#f5f5f5",
+  "background_color": "#f5f5f5",
+  "icons": [
+    {
+      "src": "./assets/pwa-icons/popcorn144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "./assets/pwa-icons/popcorn512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "./assets/pwa-icons/popcorn144-maskable.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -84,6 +84,16 @@ module.exports = ({ development }) => ({
           from: 'src/assets',
           to: 'assets',
         },
+        {
+          from: 'src/manifest.json',
+          to: './manifest.json',
+          toType: 'file',
+        },
+        {
+          from: 'src/scripts/service-worker.js',
+          to: './service-worker.js',
+          toType: 'file',
+        },
       ],
     }),
   ],
