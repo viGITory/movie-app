@@ -1,0 +1,55 @@
+@media (max-width: 410px) {
+  .header {
+    &__search-buttons {
+      width: 276px;
+    }
+
+    [data-search="movie"],
+    [data-search="tv"] {
+      width: 50%;
+    }
+  }
+
+  .header__search,
+  .movie-modal__genres-wrapper,
+  .movie-modal__release {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .header {
+    &__inner {
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .movie-modal {
+    &__bottom,
+    &__release {
+      gap: 10px;
+    }
+
+    &__release {
+      display: flex;
+      align-items: center;
+      order: 1;
+    }
+
+    &__release-date {
+      margin: 0;
+    }
+
+    &__cast {
+      justify-content: center;
+      width: 100%;
+      padding-bottom: 10px;
+
+      border-bottom: 1px solid transparent;
+      border-image: $border-image;
+      border-image-slice: 1;
+    }
+  }
+}
