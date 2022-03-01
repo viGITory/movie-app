@@ -6,7 +6,7 @@ export default class MovieModal {
 
   constructor() {
     this.container = document.createElement('div') as HTMLDivElement;
-    this.container.classList.add('movie-modal', 'hide');
+    this.container.classList.add('movie-modal', 'hide-modal');
 
     this.specialVideoKey = 'dQw4w9WgXcQ';
   }
@@ -73,10 +73,10 @@ export default class MovieModal {
   };
 
   public show = (): void => {
-    this.container.classList.remove('hide');
+    this.container.classList.remove('hide-modal');
   };
 
   public hide = (): void => {
-    this.container.classList.add('hide');
+    this.container.classList.add('hide-modal');
   };
 }

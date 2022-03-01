@@ -22,7 +22,11 @@
   box-shadow: $inner-shadow;
 }
 
-.hide {
+.hide-modal {
   pointer-events: none;
   opacity: 0;
+}
+
+.hide-preloader {
+  display: none;
 }

@@ -9,9 +9,15 @@ export default class Preloader {
   public render = (): HTMLDivElement => {
     this.container.innerHTML = `
       <div class="preloader__inner">
-        <div class="preloader__square"><span></span><span></span><span></span></div>
-        <div class="preloader__square"><span></span><span></span><span></span></div>
-        <div class="preloader__square"><span></span><span></span><span></span></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     `;
 
@@ -19,10 +25,10 @@ export default class Preloader {
   };
 
   public hide = (): void => {
-    this.container.classList.add('hide');
+    this.container.classList.add('hide-preloader');
   };
 
   public show = (): void => {
-    this.container.classList.remove('hide');
+    this.container.classList.remove('hide-preloader');
   };
 }
