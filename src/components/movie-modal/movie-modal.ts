@@ -24,7 +24,7 @@ export default class MovieModal {
           <div class="movie-modal__actor" style="background-image: url(https://image.tmdb.org/t/p/w300${item.profile_path})" title="${item.name}"></div>
         `;
       })
-      .slice(0, 5)
+      .slice(0, 10)
       .join('');
 
     const genresList = genres.genres
