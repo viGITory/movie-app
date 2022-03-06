@@ -1,7 +1,7 @@
 export default class Header {
   public render = (): string => {
     return `
-      <header class="header">
+      <header class="header" id="scroll-top">
         <div class="container">
           <div class="header__inner">
             <a class="header__logo" href="index.html">Movie<span class="header__logo-short">App</span></a>

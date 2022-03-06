@@ -55,7 +55,10 @@ export default class Page {
                 <h2 class="visually-hidden">Movies/TV</h2>
                 <div class="main__movies"></div>
               </div>
-              <button class="button" type="button" data-type="load">Load more</button>
+              <div class="main__bottom">
+                <button class="button" type="button" data-type="load">Load more</button>
+                <a class="main__scroll-button button" href="#scroll-top"></a>
+              </div>
             </div>
           </div>
         </main>
