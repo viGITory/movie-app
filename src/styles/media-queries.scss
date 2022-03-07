@@ -23,6 +23,32 @@
       justify-content: center;
     }
   }
+
+  .movie-modal {
+    &__top {
+      position: relative;
+      top: 0;
+      left: 0;
+      align-items: center;
+      width: auto;
+      max-width: 100%;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+
+      border-radius: $small-radius;
+      box-shadow: $inner-shadow;
+    }
+
+    &__title {
+      padding: 0;
+
+      box-shadow: none;
+    }
+
+    &__close-button {
+      border: 1px solid $light-transparent;
+    }
+  }
 }
 
 @media (max-width: 780px) {

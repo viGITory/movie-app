@@ -2,6 +2,8 @@ import { IMovieData, IActors, IVideos, IGenres } from '../../scripts/types';
 
 export default class MovieModal {
   container: HTMLDivElement;
+  closeButton!: HTMLButtonElement;
+
   specialVideoKey: string;
 
   constructor() {
@@ -38,7 +40,12 @@ export default class MovieModal {
 
     this.container.innerHTML = `
       <div class="movie-modal__inner">
-        <h3 class="movie-modal__title">${movieData.title || movieData.name}</h3>
+        <div class="movie-modal__top">
+          <h3 class="movie-modal__title">${
+            movieData.title || movieData.name
+          }</h3>
+          <button class="movie-modal__close-button" type="button">✖</button>
+        </div>
         <div class="movie-modal__poster-wrapper">
           <div class="movie-modal__poster" style="background-image: url(https://image.tmdb.org/t/p/w1280${
             movieData.backdrop_path
@@ -78,5 +85,13 @@ export default class MovieModal {
 
   public hide = (): void => {
     this.container.classList.add('hide-modal');
+  };
+
+  public addListeners = () => {
+    this.closeButton = this.container.querySelector(
+      '.movie-modal__close-button'
+    ) as HTMLButtonElement;
+
+    this.closeButton.addEventListener('click', this.hide);
   };
 }

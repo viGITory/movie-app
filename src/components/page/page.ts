@@ -155,6 +155,7 @@ export default class Page {
           );
 
           this.movieModal.render(item, actors, videos, genres);
+          this.movieModal.addListeners();
           this.movieModal.show();
         });
 
