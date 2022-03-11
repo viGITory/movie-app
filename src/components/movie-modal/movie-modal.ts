@@ -44,7 +44,9 @@ export default class MovieModal {
           <h3 class="movie-modal__title">${
             movieData.title || movieData.name
           }</h3>
-          <button class="movie-modal__close-button" type="button">✖</button>
+          <button class="movie-modal__close-button" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M 12 11.2929 L 16.1464 7.14645 C 16.3417 6.95118 16.6583 6.95118 16.8536 7.14645 C 17.0488 7.34171 17.0488 7.65829 16.8536 7.85355 L 12.7071 12 L 16.8536 16.1464 C 17.0488 16.3417 17.0488 16.6583 16.8536 16.8536 C 16.6583 17.0488 16.3417 17.0488 16.1464 16.8536 L 12 12.7071 L 7.85355 16.8536 C 7.65829 17.0488 7.34171 17.0488 7.14645 16.8536 C 6.95118 16.6583 6.95118 16.3417 7.14645 16.1464 L 11.2929 12 L 7.14645 7.85355 C 6.95118 7.65829 6.95118 7.34171 7.14645 7.14645 C 7.34171 6.95118 7.65829 6.95118 7.85355 7.14645 L 12 11.2929 Z" /></svg>
+          </button>
         </div>
         <div class="movie-modal__poster-wrapper">
           <div class="movie-modal__poster" style="background-image: url(https://image.tmdb.org/t/p/w1280${

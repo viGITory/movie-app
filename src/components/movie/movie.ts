@@ -11,11 +11,9 @@ export default class Movie {
   public render = (item: IMovieData): HTMLElement => {
     this.container.innerHTML = `
       <h3 class="movie__title">${item.title || item.name}</h3>
-      <div class="movie__poster-wrapper">
-        <div class="movie__poster" style="background-image: url(https://image.tmdb.org/t/p/w780${
-          item.poster_path
-        })">
-        </div>
+      <div class="movie__poster" style="background-image: url(https://image.tmdb.org/t/p/w780${
+        item.poster_path
+      })">
       </div>
       <p class="movie__rate">${item.vote_average}</p>
     `;

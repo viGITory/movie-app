@@ -2,13 +2,14 @@ $extra-light: #fff;
 $primary-light: #f5f5f5;
 $light-transparent: rgba(0, 0, 0, .25);
 $middle-transparent: rgba(0, 0, 0, .6);
+$primary-bright: #e54b3f;
 $primary-dark: #030303;
 
 $small-radius: 6px;
 $middle-radius: 8px;
 $big-radius: 10px;
 
-$outer-shadow: -5px -5px 10px $extra-light, 5px 5px 10px $light-transparent;
+$outer-shadow: 5px 5px 10px $light-transparent;
 $inner-shadow: inset 2px 2px 5px $light-transparent,
   inset -5px -5px 10px $extra-light;
 $border-image: linear-gradient(

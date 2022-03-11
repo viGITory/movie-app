@@ -1,37 +1,46 @@
 .movie {
+  position: relative;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   min-width: 276px;
   min-height: 404px;
+  padding: 10px;
+  overflow: hidden;
   gap: 10px;
 
   cursor: pointer;
-  border: 10px solid $primary-light;
-  border-radius: $big-radius;
+  background-image: url("../assets/svg/no-image.svg");
+  background-size: 50%;
+  border-radius: $middle-radius;
   box-shadow: $outer-shadow;
 
   transition: box-shadow .2s;
-
-  &,
-  &__title {
-    position: relative;
-    padding: 10px;
-  }
 
   &:hover {
     box-shadow: none;
   }
 
-  &:hover > &__poster-wrapper::after {
+  &:hover > &__poster::after {
     opacity: 1;
+  }
+
+  &,
+  &__poster {
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__title,
+  &__rate,
+  &__poster::after {
+    text-align: center;
   }
 
   &__title,
   &__rate {
+    z-index: 1;
     margin: 0;
-
-    text-align: center;
 
     background-color: $primary-light;
     border-radius: $small-radius;
@@ -45,50 +54,30 @@
     font-weight: 400;
   }
 
-  &__poster-wrapper,
   &__poster {
-    width: 100%;
-    height: 100%;
+    background-color: $light-transparent;
+    background-size: cover;
+    background-blend-mode: multiply;
 
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  &__poster-wrapper,
-  &__poster-wrapper::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  &__poster-wrapper {
-    z-index: -1;
-
-    background-image: url("../assets/svg/no-image.svg");
-    background-size: 50%;
-
+    &,
     &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
+    }
 
+    &::after {
       font-size: 32px;
-      line-height: 384px;
+      line-height: 404px;
       color: $primary-light;
-      text-align: center;
 
       content: "More info";
       background-color: $middle-transparent;
-      border-radius: $middle-radius;
       opacity: 0;
       transition: opacity .2s;
     }
-  }
-
-  &__poster {
-    background-color: $light-transparent;
-    background-blend-mode: multiply;
-    background-size: cover;
-    border-radius: $middle-radius;
   }
 
   &__rate {
