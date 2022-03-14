@@ -1,5 +1,10 @@
 @media (max-width: 410px) {
   .header {
+    &__logo {
+      box-sizing: border-box;
+      width: 225px;
+    }
+
     &__search-buttons {
       width: 276px;
     }
@@ -18,12 +23,6 @@
 }
 
 @media (max-width: 640px) {
-  .header {
-    &__inner {
-      justify-content: center;
-    }
-  }
-
   .movie-modal {
     &__top {
       position: relative;
@@ -47,6 +46,22 @@
 
     &__close-button {
       border: 1px solid $light-transparent;
+    }
+  }
+}
+
+@media (max-width: 690px) {
+  .header {
+    &__inner {
+      justify-content: center;
+    }
+
+    &__logo {
+      margin-right: 0;
+    }
+
+    &__search {
+      order: 1;
     }
   }
 }

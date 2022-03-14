@@ -11,7 +11,20 @@
   border-radius: $small-radius;
   outline: none;
 
-  transition: box-shadow .2s, border-color .2s;
+  transition: box-shadow .2s, border-color .2s, background-color .2s, color .2s;
+
+  &[data-button="theme"] {
+    width: 41px;
+    height: 41px;
+
+    & svg {
+      width: 100%;
+      height: 100%;
+
+      transition: fill .2s;
+      fill: $primary-dark;
+    }
+  }
 
   &[data-search="movie"],
   &[data-search="tv"] {

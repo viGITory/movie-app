@@ -1,0 +1,228 @@
+.dark-theme {
+  $dark: #282828;
+  $middle-dark: #454545;
+  $light-dark: #575757;
+
+  .page {
+    color: $primary-light;
+
+    &,
+    &::-webkit-scrollbar-track {
+      background-color: $dark;
+    }
+
+    * ::selection {
+      color: $middle-dark;
+      background-color: $primary-light;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-bright;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: $middle-dark;
+      box-shadow: inset 0 0 0 1px $light-dark;
+    }
+  }
+
+  .button {
+    background-color: $middle-dark;
+    border-color: transparent;
+
+    &:hover,
+    &.active-btn {
+      box-shadow: none;
+    }
+
+    &:hover {
+      background-color: $light-dark;
+    }
+
+    &.active-btn {
+      background-color: $primary-bright;
+    }
+
+    &[data-button="theme"] svg {
+      fill: #f5f5f5;
+    }
+
+    &[data-button="theme"],
+    &[data-search="movie"],
+    &[data-search="tv"] {
+      background-color: $light-dark;
+
+      &:hover,
+      &.active-btn {
+        background-color: $primary-bright;
+      }
+    }
+  }
+
+  .header {
+    background-color: $middle-dark;
+    border-image: none;
+    box-shadow: 0 5px 10px $light-transparent;
+
+    &__logo-short {
+      color: $primary-bright;
+    }
+
+    &__theme-button,
+    &__input {
+      background-color: $light-dark;
+    }
+
+    &__input {
+      box-shadow: none;
+
+      &::placeholder {
+        color: $primary-light;
+      }
+    }
+  }
+
+  .main {
+    &__scroll-button path {
+      fill: $primary-light;
+    }
+
+    &__error-wrapper {
+      background-color: $middle-dark;
+    }
+  }
+
+  .preloader {
+    background-color: $dark;
+    box-shadow: 0 0 0 15px $dark;
+
+    &__inner div {
+      background-color: $middle-dark;
+      border-color: transparent;
+    }
+  }
+
+  .movie {
+    &:hover,
+    &__title,
+    &__rate {
+      box-shadow: none;
+    }
+
+    &__title,
+    &__rate {
+      background-color: $light-dark;
+    }
+
+    &__poster {
+      background-color: rgba(0, 0, 0, .2);
+    }
+  }
+
+  .footer {
+    background-color: $middle-dark;
+    border-image: none;
+    box-shadow: 0 -5px 10px $light-transparent;
+
+    &__github,
+    &__logo {
+      &:hover {
+        background-color: $light-dark;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .movie-modal {
+    &__inner {
+      background-color: $dark;
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-bright;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: $middle-dark;
+      }
+    }
+
+    &__title,
+    &__close-button,
+    &__genre,
+    &__youtube {
+      background-color: $light-dark;
+    }
+
+    &__title,
+    &__description-wrapper {
+      box-shadow: none;
+    }
+
+    &__close-button,
+    &__youtube {
+      &:hover {
+        background-color: $primary-bright;
+      }
+    }
+
+    &__close-button,
+    &__genre,
+    &__youtube {
+      border-color: transparent;
+    }
+
+    &__close-button {
+      svg {
+        fill: $primary-light;
+      }
+    }
+
+    &__poster,
+    &__actor {
+      background-color: rgba(0, 0, 0, .2);
+    }
+
+    &__description-wrapper {
+      background-color: $middle-dark;
+    }
+
+    &__bottom {
+      border-image:
+        linear-gradient(
+          to right,
+          transparent,
+          $light-dark 50%,
+          transparent 100%
+        );
+      border-image-slice: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .movie-modal {
+      &__top {
+        background-color: $middle-dark;
+        box-shadow: none;
+      }
+
+      &__title {
+        background-color: transparent;
+      }
+    }
+  }
+
+  @media (max-width: 780px) {
+    .movie-modal {
+      &__cast {
+        border-image:
+          linear-gradient(
+            to right,
+            transparent,
+            $light-dark 50%,
+            transparent 100%
+          );
+        border-image-slice: 1;
+      }
+    }
+  }
+}

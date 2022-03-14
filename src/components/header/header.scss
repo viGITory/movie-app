@@ -3,6 +3,8 @@
   border-image: $border-image;
   border-image-slice: 1;
 
+  transition: box-shadow .2s, background-color .2s;
+
   &__inner,
   &__search {
     display: flex;
@@ -12,7 +14,6 @@
 
   &__inner {
     align-items: center;
-    justify-content: space-between;
     padding: 10px 0;
   }
 
@@ -23,6 +24,7 @@
 
   &__logo {
     padding-left: 40px;
+    margin-right: auto;
 
     font-size: 39px;
     line-height: 1;
@@ -32,6 +34,11 @@
     background-repeat: no-repeat;
     background-position: left top;
     background-size: auto 90%;
+  }
+
+  &__logo,
+  &__logo-short {
+    transition: color .2s;
   }
 
   &__logo-short {
@@ -55,8 +62,12 @@
     outline: none;
     box-shadow: $inner-shadow;
 
+    transition: background-color .2s, border-color .2s, color 2s, box-shadow .2s;
+
     &::placeholder {
       color: $middle-transparent;
+
+      transition: color .2s;
     }
   }
 }

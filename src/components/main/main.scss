@@ -53,7 +53,7 @@
     }
 
     & path {
-
+      transition: fill .2s;
       fill: $primary-dark;
     }
   }
@@ -65,6 +65,7 @@
 
     border-radius: $big-radius;
     box-shadow: $outer-shadow;
+    transition: box-shadow .2s, background-color .2s, color .2s;
   }
 
   &__error-image {

@@ -45,6 +45,8 @@
     background-color: $primary-light;
     border-radius: $small-radius;
     box-shadow: $inner-shadow;
+
+    transition: background-color .2s, box-shadow .2s, color .2s;
   }
 
   &__title {

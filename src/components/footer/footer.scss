@@ -3,6 +3,8 @@
   border-image: $border-image;
   border-image-slice: 1;
 
+  transition: box-shadow .2s, background-color .2s;
+
   &__inner {
     display: flex;
     flex-wrap: wrap;
@@ -19,7 +21,7 @@
     text-decoration: none;
 
     border-radius: $small-radius;
-    transition: box-shadow .2s;
+    transition: box-shadow .2s, background-color .2s;
 
     &:hover {
       box-shadow: $inner-shadow;
