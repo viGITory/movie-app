@@ -7,6 +7,8 @@ import Movie from '../movie/movie';
 import MovieModal from '../movie-modal/movie-modal';
 
 export default class Page {
+  container: HTMLDivElement;
+  moviesContainer!: HTMLDivElement;
   themeButton!: HTMLButtonElement;
   searchInput!: HTMLInputElement;
   searchMovieButton!: HTMLButtonElement;
@@ -74,9 +76,7 @@ export default class Page {
     this.moviesContainer = this.container.querySelector(
       '.main__movies'
     ) as HTMLDivElement;
-    this.themeButton = this.container.querySelector(
-      '[data-button=theme]'
-    ) as HTMLButtonElement;
+    this.searchInput = this.container.querySelector(
       '.header__input'
     ) as HTMLInputElement;
     this.searchMovieButton = this.container.querySelector(
@@ -84,6 +84,9 @@ export default class Page {
     ) as HTMLButtonElement;
     this.searchTvButton = this.container.querySelector(
       '[data-search=tv]'
+    ) as HTMLButtonElement;
+    this.themeButton = this.container.querySelector(
+      '[data-button=theme]'
     ) as HTMLButtonElement;
     this.loadButton = this.container.querySelector(
       '[data-type=load]'
