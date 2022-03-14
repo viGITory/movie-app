@@ -1,16 +1,13 @@
 import { IMovieData, IActors, IVideos, IGenres } from '../../scripts/types';
 
 export default class MovieModal {
+  private static specialVideoKey = 'dQw4w9WgXcQ';
   container: HTMLDivElement;
   closeButton!: HTMLButtonElement;
-
-  specialVideoKey: string;
 
   constructor() {
     this.container = document.createElement('div') as HTMLDivElement;
     this.container.classList.add('movie-modal', 'hide-modal');
-
-    this.specialVideoKey = 'dQw4w9WgXcQ';
   }
 
   public render = (
@@ -63,7 +60,7 @@ export default class MovieModal {
                 movieData.release_date || movieData.first_air_date || ''
               )}</p>
               <a class="movie-modal__youtube" href="https://www.youtube.com/watch?v=${
-                videos.results[0]?.key || this.specialVideoKey
+                videos.results[0]?.key || MovieModal.specialVideoKey
               }" target="_blank">YouTube</a>
             </div>
             <div class="movie-modal__cast">${actorsCast}</div>

@@ -7,7 +7,12 @@ import Movie from '../movie/movie';
 import MovieModal from '../movie-modal/movie-modal';
 
 export default class Page {
-  container: HTMLDivElement;
+  private static container = document.getElementById('root') as HTMLDivElement;
+  private static currentType = 'movie';
+  private static pageCount = 1;
+  private static apiKey = '48fa0c325cf33db96de5b585427f9aa1';
+  private static currentUrl = `https://api.themoviedb.org/3/${Page.currentType}/popular?api_key=${Page.apiKey}&language=en-US&page=`;
+
   moviesContainer!: HTMLDivElement;
   themeButton!: HTMLButtonElement;
   searchInput!: HTMLInputElement;
@@ -20,24 +25,13 @@ export default class Page {
   preloader: Preloader;
   movieModal: MovieModal;
 
-  pageCount: number;
-  currentUrl: string;
-  apiKey: string;
-  currentType: string;
-
   constructor() {
-    this.container = document.getElementById('root') as HTMLDivElement;
     this.preloader = new Preloader();
     this.movieModal = new MovieModal();
-
-    this.currentType = 'movie';
-    this.pageCount = 1;
-    this.apiKey = '48fa0c325cf33db96de5b585427f9aa1';
-    this.currentUrl = `https://api.themoviedb.org/3/${this.currentType}/popular?api_key=${this.apiKey}&language=en-US&page=`;
   }
 
   private render = (): HTMLDivElement => {
-    this.container.innerHTML = `
+    Page.container.innerHTML = `
       <div class="page__inner">
         ${new Header().render()}
         <main class="main">
@@ -69,30 +63,30 @@ export default class Page {
       </div>
     `;
 
-    return this.container;
+    return Page.container;
   };
 
   private getElements = (): void => {
-    this.moviesContainer = this.container.querySelector(
+    this.moviesContainer = Page.container.querySelector(
       '.main__movies'
     ) as HTMLDivElement;
-    this.searchInput = this.container.querySelector(
+    this.searchInput = Page.container.querySelector(
       '.header__input'
     ) as HTMLInputElement;
-    this.searchMovieButton = this.container.querySelector(
+    this.searchMovieButton = Page.container.querySelector(
       '[data-search=movie]'
     ) as HTMLButtonElement;
-    this.searchTvButton = this.container.querySelector(
+    this.searchTvButton = Page.container.querySelector(
       '[data-search=tv]'
     ) as HTMLButtonElement;
-    this.themeButton = this.container.querySelector(
+    this.themeButton = Page.container.querySelector(
       '[data-button=theme]'
     ) as HTMLButtonElement;
-    this.loadButton = this.container.querySelector(
+    this.loadButton = Page.container.querySelector(
       '[data-type=load]'
     ) as HTMLButtonElement;
-    this.searchButtons = this.container.querySelectorAll('[data-search]');
-    this.categoryButtons = this.container.querySelectorAll('[data-category]');
+    this.searchButtons = Page.container.querySelectorAll('[data-search]');
+    this.categoryButtons = Page.container.querySelectorAll('[data-category]');
   };
 
   private addComponents = (): void => {
@@ -100,14 +94,14 @@ export default class Page {
       'beforebegin',
       this.preloader.render()
     );
-    this.container.append(this.movieModal.modalContainer);
+    Page.container.append(this.movieModal.modalContainer);
   };
 
   private showMovies = (): void => {
     this.moviesContainer.innerHTML = '';
-    this.pageCount = 1;
+    Page.pageCount = 1;
     this.preloader.show();
-    this.addMovies(this.currentUrl);
+    this.addMovies(Page.currentUrl);
   };
 
   private getData = async (url: string) => {
@@ -144,20 +138,20 @@ export default class Page {
 
   private addMovies = async (url: string): Promise<void> => {
     try {
-      const data = await this.getData(url + this.pageCount);
+      const data = await this.getData(url + Page.pageCount);
 
       data.results.forEach((item: IMovieData) => {
         const movie = new Movie().render(item);
 
         movie.addEventListener('click', async () => {
           const actors = await this.getData(
-            `https://api.themoviedb.org/3/${this.currentType}/${item.id}/credits?api_key=${this.apiKey}&language=en-US`
+            `https://api.themoviedb.org/3/${Page.currentType}/${item.id}/credits?api_key=${Page.apiKey}&language=en-US`
           );
           const videos = await this.getData(
-            `https://api.themoviedb.org/3/${this.currentType}/${item.id}/videos?api_key=${this.apiKey}&language=en-US`
+            `https://api.themoviedb.org/3/${Page.currentType}/${item.id}/videos?api_key=${Page.apiKey}&language=en-US`
           );
           const genres = await this.getData(
-            `https://api.themoviedb.org/3/${this.currentType}/${item.id}?api_key=${this.apiKey}&language=en-US`
+            `https://api.themoviedb.org/3/${Page.currentType}/${item.id}?api_key=${Page.apiKey}&language=en-US`
           );
 
           this.movieModal.render(item, actors, videos, genres);
@@ -203,12 +197,12 @@ export default class Page {
         this.searchInput.value = this.searchInput.value.trim();
 
         if (this.searchMovieButton.classList.contains('active-btn')) {
-          this.currentType = 'movie';
+          Page.currentType = 'movie';
         } else if (this.searchTvButton.classList.contains('active-btn')) {
-          this.currentType = 'tv';
+          Page.currentType = 'tv';
         }
 
-        this.currentUrl = `https://api.themoviedb.org/3/search/${this.currentType}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+        Page.currentUrl = `https://api.themoviedb.org/3/search/${Page.currentType}?query=${this.searchInput.value}&api_key=${Page.apiKey}&page=`;
         this.showMovies();
 
         this.categoryButtons.forEach((elem) => {
@@ -219,10 +213,10 @@ export default class Page {
 
     this.searchButtons.forEach((item) => {
       item.addEventListener('click', () => {
-        this.currentType = `${item.dataset['search']}`;
+        Page.currentType = `${item.dataset['search']}`;
 
         if (this.searchInput.value && !item.classList.contains('active-btn')) {
-          this.currentUrl = `https://api.themoviedb.org/3/search/${this.currentType}?query=${this.searchInput.value}&api_key=${this.apiKey}&page=`;
+          Page.currentUrl = `https://api.themoviedb.org/3/search/${Page.currentType}?query=${this.searchInput.value}&api_key=${Page.apiKey}&page=`;
           this.showMovies();
         }
 
@@ -240,8 +234,8 @@ export default class Page {
 
     this.categoryButtons.forEach((item) => {
       item.addEventListener('click', () => {
-        this.currentUrl = `https://api.themoviedb.org/3/${item.dataset['type']}/${item.dataset['category']}?api_key=${this.apiKey}&language=en-US&page=`;
-        this.currentType = `${item.dataset['type']}`;
+        Page.currentUrl = `https://api.themoviedb.org/3/${item.dataset['type']}/${item.dataset['category']}?api_key=${Page.apiKey}&language=en-US&page=`;
+        Page.currentType = `${item.dataset['type']}`;
 
         if (!item.classList.contains('active-btn')) {
           this.categoryButtons.forEach((elem) => {
@@ -256,9 +250,9 @@ export default class Page {
     });
 
     this.loadButton.addEventListener('click', () => {
-      this.pageCount++;
+      Page.pageCount++;
       this.preloader.show();
-      this.addMovies(this.currentUrl);
+      this.addMovies(Page.currentUrl);
     });
   };
 
@@ -266,7 +260,7 @@ export default class Page {
     this.render();
     this.getElements();
     this.addComponents();
-    this.addMovies(this.currentUrl);
+    this.addMovies(Page.currentUrl);
     this.addListeners();
   };
 }
