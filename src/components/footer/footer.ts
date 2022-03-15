@@ -4,9 +4,9 @@ export default class Footer {
       <footer class="footer">
         <div class="container">
           <div class="footer__inner">
-            <a class="footer__github" href="https://github.com/viGITory" target="_blank">viGITory</a>
+            <a class="footer__link" href="https://github.com/viGITory" target="_blank">viGITory</a>
             <time class="footer__year">2022</time>
-            <a class="footer__logo" href="https://rs.school/js" target="_blank">RSSchool</a>
+            <a class="footer__link" href="https://rs.school/js" target="_blank">RSSchool</a>
           </div>
         </div>
       </footer>

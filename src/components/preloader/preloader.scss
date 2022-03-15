@@ -4,9 +4,6 @@
   width: 100%;
   height: 100%;
 
-  background-color: $primary-light;
-  box-shadow: 0 0 0 15px $primary-light;
-
   &__inner {
     position: sticky;
     top: calc(50% - 50px);

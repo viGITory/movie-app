@@ -16,13 +16,22 @@
   &[data-button="theme"] {
     width: 41px;
     height: 41px;
+    padding: 5px;
 
-    & svg {
+    svg,
+    svg * {
+      transition: fill .2s;
+    }
+
+    svg {
       width: 100%;
       height: 100%;
 
-      transition: fill .2s;
-      fill: $primary-dark;
+      fill: $primary-bright;
+    }
+
+    path:last-child {
+      fill: $light-transparent;
     }
   }
 

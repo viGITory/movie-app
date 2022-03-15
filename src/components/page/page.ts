@@ -48,7 +48,7 @@ export default class Page {
               </div>
               <div class="main__center">
                 <h2 class="visually-hidden">Movies/TV</h2>
-                <div class="main__movies"></div>
+                <div class="main__movies hide"></div>
               </div>
               <div class="main__bottom">
                 <button class="button" type="button" data-type="load">Load more</button>
@@ -101,6 +101,7 @@ export default class Page {
     this.moviesContainer.innerHTML = '';
     Page.pageCount = 1;
     this.preloader.show();
+    this.moviesContainer.classList.add('hide');
     this.addMovies(Page.currentUrl);
   };
 
@@ -131,6 +132,7 @@ export default class Page {
       }
 
       this.preloader.hide();
+      this.moviesContainer.classList.remove('hide');
     }, 2000);
 
     return data;
@@ -256,6 +258,7 @@ export default class Page {
     this.loadButton.addEventListener('click', () => {
       Page.pageCount++;
       this.preloader.show();
+      this.moviesContainer.classList.add('hide');
       this.addMovies(Page.currentUrl);
     });
   };

@@ -25,10 +25,10 @@ export default class Preloader {
   };
 
   public hide = (): void => {
-    this.container.classList.add('hide-preloader');
+    this.container.classList.add('hide');
   };
 
   public show = (): void => {
-    this.container.classList.remove('hide-preloader');
+    this.container.classList.remove('hide');
   };
 }

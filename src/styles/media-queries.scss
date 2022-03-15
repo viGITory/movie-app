@@ -5,6 +5,10 @@
       width: 225px;
     }
 
+    &__search {
+      justify-content: center;
+    }
+
     &__search-buttons {
       width: 276px;
     }
@@ -15,10 +19,11 @@
     }
   }
 
-  .header__search,
-  .movie-modal__genres-wrapper,
-  .movie-modal__release {
-    justify-content: center;
+  .movie-modal {
+    &__genres-wrapper,
+    &__release {
+      justify-content: center;
+    }
   }
 }
 

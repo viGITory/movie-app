@@ -46,7 +46,11 @@
     }
 
     &[data-button="theme"] svg {
-      fill: #f5f5f5;
+      fill: $middle-dark;
+
+      path:last-child {
+        fill: $primary-light;
+      }
     }
 
     &[data-button="theme"],
@@ -96,9 +100,6 @@
   }
 
   .preloader {
-    background-color: $dark;
-    box-shadow: 0 0 0 15px $dark;
-
     &__inner div {
       background-color: $middle-dark;
       border-color: transparent;
@@ -127,8 +128,7 @@
     border-image: none;
     box-shadow: 0 -5px 10px $light-transparent;
 
-    &__github,
-    &__logo {
+    &__link {
       &:hover,
       &:focus {
         background-color: $light-dark;

@@ -47,21 +47,23 @@
     width: 41px;
     height: 41px;
 
-    & svg {
+    svg {
       width: 100%;
       height: 100%;
     }
 
-    & path {
+    path {
       transition: fill .2s;
       fill: $primary-dark;
     }
   }
 
   &__error-wrapper {
-    grid-column: span 5;
-    justify-self: center;
+    box-sizing: border-box;
+    max-width: 650px;
     padding: 10px;
+    grid-column: 1 / -1;
+    justify-self: center;
 
     border-radius: $big-radius;
     box-shadow: $outer-shadow;
