@@ -99,13 +99,6 @@
     }
   }
 
-  .preloader {
-    &__inner div {
-      background-color: $middle-dark;
-      border-color: transparent;
-    }
-  }
-
   .movie {
     &:hover,
     &__title,

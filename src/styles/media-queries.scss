@@ -25,6 +25,24 @@
       justify-content: center;
     }
   }
+
+  .preloader {
+    &__inner {
+      top: calc(50% - 17px);
+      justify-content: space-between;
+      max-width: 276px;
+      margin: 0 auto;
+      gap: initial;
+
+      div {
+        width: 35px;
+        height: 35px;
+
+        font-size: 14px;
+        line-height: 35px;
+      }
+    }
+  }
 }
 
 @media (max-width: 640px) {

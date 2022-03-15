@@ -9,15 +9,13 @@ export default class Preloader {
   public render = (): HTMLDivElement => {
     this.container.innerHTML = `
       <div class="preloader__inner">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div>L</div>
+        <div>o</div>
+        <div>a</div>
+        <div>d</div>
+        <div>i</div>
+        <div>n</div>
+        <div>g</div>
       </div>
     `;
 
