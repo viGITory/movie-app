@@ -21,9 +21,11 @@
     text-decoration: none;
 
     border-radius: $small-radius;
+    outline: none;
     transition: box-shadow .2s, background-color .2s;
 
-    &:hover {
+    &:hover,
+    &:focus {
       box-shadow: $inner-shadow;
     }
   }

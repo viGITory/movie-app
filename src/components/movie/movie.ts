@@ -6,6 +6,7 @@ export default class Movie {
   constructor() {
     this.container = document.createElement('article');
     this.container.classList.add('movie');
+    this.container.setAttribute('tabindex', '0');
   }
 
   public render = (item: IMovieData): HTMLElement => {

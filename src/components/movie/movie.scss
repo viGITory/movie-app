@@ -13,15 +13,18 @@
   background-image: url("../assets/svg/no-image.svg");
   background-size: 50%;
   border-radius: $middle-radius;
+  outline: none;
   box-shadow: $outer-shadow;
 
   transition: box-shadow .2s;
 
-  &:hover {
+  &:hover,
+  &:focus {
     box-shadow: none;
   }
 
-  &:hover > &__poster::after {
+  &:hover > &__poster::after,
+  &:focus > &__poster::after {
     opacity: 1;
   }
 

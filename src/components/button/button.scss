@@ -47,7 +47,8 @@
     margin-top: auto;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     border-color: transparent;
     box-shadow: $inner-shadow;
   }

@@ -31,11 +31,13 @@
     border-color: transparent;
 
     &:hover,
+    &:focus,
     &.active-btn {
       box-shadow: none;
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $light-dark;
     }
 
@@ -53,6 +55,7 @@
       background-color: $light-dark;
 
       &:hover,
+      &:focus,
       &.active-btn {
         background-color: $primary-bright;
       }
@@ -126,7 +129,8 @@
 
     &__github,
     &__logo {
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: $light-dark;
         box-shadow: none;
       }
@@ -160,7 +164,8 @@
 
     &__close-button,
     &__youtube {
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: $primary-bright;
       }
     }
