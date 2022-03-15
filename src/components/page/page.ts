@@ -166,11 +166,15 @@ export default class Page {
 
   private addListeners = (): void => {
     window.addEventListener('beforeunload', () => {
-      localStorage.setItem('theme', document.documentElement.className);
+      localStorage.setItem(
+        'vigitory-movieapp-theme',
+        document.documentElement.className
+      );
     });
 
     document.addEventListener('DOMContentLoaded', () => {
-      document.documentElement.className = localStorage.getItem('theme') || '';
+      document.documentElement.className =
+        localStorage.getItem('vigitory-movieapp-theme') || '';
     });
 
     document.addEventListener('keyup', (event: KeyboardEvent) => {
