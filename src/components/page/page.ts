@@ -1,5 +1,4 @@
 import { IMovieData } from '../../scripts/types';
-
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Preloader from '../preloader/preloader';
@@ -14,12 +13,9 @@ export default class Page {
   private static currentUrl = `https://api.themoviedb.org/3/${Page.currentType}/popular?api_key=${Page.apiKey}&language=en-US&page=`;
 
   moviesContainer!: HTMLDivElement;
-  themeButton!: HTMLButtonElement;
   searchInput!: HTMLInputElement;
   searchMovieButton!: HTMLButtonElement;
   searchTvButton!: HTMLButtonElement;
-  loadButton!: HTMLButtonElement;
-  searchButtons!: NodeListOf<HTMLElement>;
   categoryButtons!: NodeListOf<HTMLElement>;
 
   preloader: Preloader;
@@ -79,13 +75,7 @@ export default class Page {
     this.searchTvButton = Page.container.querySelector(
       '[data-search=tv]'
     ) as HTMLButtonElement;
-    this.themeButton = Page.container.querySelector(
-      '[data-button=theme]'
-    ) as HTMLButtonElement;
-    this.loadButton = Page.container.querySelector(
-      '[data-type=load]'
-    ) as HTMLButtonElement;
-    this.searchButtons = Page.container.querySelectorAll('[data-search]');
+
     this.categoryButtons = Page.container.querySelectorAll('[data-category]');
   };
 
@@ -194,7 +184,9 @@ export default class Page {
         this.movieModal.hide();
     });
 
-    this.themeButton.addEventListener('click', () => {
+    (
+      Page.container.querySelector('[data-button=theme]') as HTMLButtonElement
+    ).addEventListener('click', () => {
       document.documentElement.classList.toggle('dark-theme');
     });
 
@@ -217,7 +209,11 @@ export default class Page {
       }
     });
 
-    this.searchButtons.forEach((item) => {
+    (
+      Page.container.querySelectorAll(
+        '[data-search]'
+      ) as NodeListOf<HTMLElement>
+    ).forEach((item) => {
       item.addEventListener('click', () => {
         Page.currentType = `${item.dataset['search']}`;
 
@@ -255,7 +251,9 @@ export default class Page {
       });
     });
 
-    this.loadButton.addEventListener('click', () => {
+    (
+      Page.container.querySelector('[data-type=load]') as HTMLButtonElement
+    ).addEventListener('click', () => {
       Page.pageCount++;
       this.preloader.show();
       this.moviesContainer.classList.add('hide');
