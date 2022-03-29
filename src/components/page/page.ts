@@ -1,4 +1,6 @@
 import { IMovieData } from '../../scripts/types';
+import getData from '../../utils/getData';
+
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Preloader from '../preloader/preloader';
@@ -95,24 +97,11 @@ export default class Page {
     this.addMovies(Page.currentUrl);
   };
 
-  private getData = async (url: string) => {
-    const result = await fetch(url);
-    const data = await result.json();
+  private addMovies = async (url: string): Promise<void> => {
+    try {
+      const data = await getData(url + Page.pageCount);
 
-    setTimeout(() => {
-      if (result.status !== 200) {
-        this.moviesContainer.innerHTML = `
-          <div class="main__error-wrapper">
-            <img class="main__error-image" src="./assets/popcorn-error.webp">
-            <p class="main__error-text">Something went wrong :(</p>
-          </div>
-        `;
-      }
-
-      if (
-        !data.results?.length &&
-        this.moviesContainer.childNodes.length === 0
-      ) {
+      if (!data.results.length && !this.moviesContainer.childNodes.length) {
         this.moviesContainer.innerHTML = `
           <div class="main__error-wrapper">
             <img class="main__error-image" src="./assets/popcorn-error.webp">
@@ -121,39 +110,42 @@ export default class Page {
         `;
       }
 
+      if (data.results && Array.isArray(data.results)) {
+        data.results.forEach((item: IMovieData) => {
+          const movie = new Movie().render(item);
+
+          movie.addEventListener('click', async () => {
+            const actors = await getData(
+              `https://api.themoviedb.org/3/${Page.currentType}/${item.id}/credits?api_key=${Page.apiKey}&language=en-US`
+            );
+            const videos = await getData(
+              `https://api.themoviedb.org/3/${Page.currentType}/${item.id}/videos?api_key=${Page.apiKey}&language=en-US`
+            );
+            const genres = await getData(
+              `https://api.themoviedb.org/3/${Page.currentType}/${item.id}?api_key=${Page.apiKey}&language=en-US`
+            );
+
+            this.movieModal.render(item, actors, videos, genres);
+            this.movieModal.addListeners();
+            this.movieModal.show();
+          });
+
+          this.moviesContainer.append(movie);
+        });
+      }
+    } catch (err) {
+      this.moviesContainer.innerHTML = `
+        <div class="main__error-wrapper">
+          <img class="main__error-image" src="./assets/popcorn-error.webp">
+          <p class="main__error-text">Something went wrong :(</p>
+        </div>
+    `;
+    }
+
+    setTimeout(() => {
       this.preloader.hide();
       this.moviesContainer.classList.remove('hide');
     }, 2000);
-
-    return data;
-  };
-
-  private addMovies = async (url: string): Promise<void> => {
-    try {
-      const data = await this.getData(url + Page.pageCount);
-
-      data.results.forEach((item: IMovieData) => {
-        const movie = new Movie().render(item);
-
-        movie.addEventListener('click', async () => {
-          const actors = await this.getData(
-            `https://api.themoviedb.org/3/${Page.currentType}/${item.id}/credits?api_key=${Page.apiKey}&language=en-US`
-          );
-          const videos = await this.getData(
-            `https://api.themoviedb.org/3/${Page.currentType}/${item.id}/videos?api_key=${Page.apiKey}&language=en-US`
-          );
-          const genres = await this.getData(
-            `https://api.themoviedb.org/3/${Page.currentType}/${item.id}?api_key=${Page.apiKey}&language=en-US`
-          );
-
-          this.movieModal.render(item, actors, videos, genres);
-          this.movieModal.addListeners();
-          this.movieModal.show();
-        });
-
-        this.moviesContainer.append(movie);
-      });
-    } catch (err) {}
   };
 
   private addListeners = (): void => {
