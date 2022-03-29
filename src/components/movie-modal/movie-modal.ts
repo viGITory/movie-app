@@ -1,7 +1,6 @@
 import { IMovieData, IActors, IVideos, IGenres } from '../../scripts/types';
 
 export default class MovieModal {
-  private static specialVideoKey = 'dQw4w9WgXcQ';
   container: HTMLDivElement;
   closeButton!: HTMLButtonElement;
 
@@ -16,24 +15,31 @@ export default class MovieModal {
     videos: IVideos,
     genres: IGenres
   ): void => {
-    const actorsCast = actors.cast
-      .filter((item) => item.profile_path !== null)
-      .map((item) => {
-        return `
-          <div class="movie-modal__actor" style="background-image: url(https://image.tmdb.org/t/p/w300${item.profile_path})" title="${item.name}"></div>
-        `;
-      })
-      .slice(0, 10)
-      .join('');
+    let video: string = 'https://www.youtube.com';
+    let actorsCast: string[] = [];
+    let genresList: string[] = [];
 
-    const genresList = genres.genres
-      .map((item) => {
-        return `
-          <p class="movie-modal__genre">${item.name}</p>
+    if (videos.results)
+      video = `https://www.youtube.com/watch?v=${videos.results[0]?.key}`;
+
+    if (Array.isArray(genres.genres)) {
+      genresList = genres.genres
+        .map((genre) => {
+          return `<p class="movie-modal__genre">${genre.name}</p>`;
+        })
+        .slice(0, 3);
+    }
+
+    if (Array.isArray(actors.cast)) {
+      actorsCast = actors.cast
+        .filter((actor) => actor.profile_path !== null)
+        .map((actor) => {
+          return `
+          <div class="movie-modal__actor" style="background-image: url(https://image.tmdb.org/t/p/w300${actor.profile_path})" title="${actor.name}"></div>
         `;
-      })
-      .slice(0, 3)
-      .join('');
+        })
+        .slice(0, 10);
+    }
 
     this.container.innerHTML = `
       <div class="movie-modal__inner">
@@ -53,17 +59,15 @@ export default class MovieModal {
         </div>
         <div class="movie-modal__description-wrapper">
           <p class="movie-modal__description">${movieData.overview}</p>
-          <div class="movie-modal__genres-wrapper">${genresList}</div>
+          <div class="movie-modal__genres-wrapper">${genresList.join('')}</div>
           <div class="movie-modal__bottom">
             <div class="movie-modal__release">
               <p class="movie-modal__release-date">Release date: ${this.formatDate(
                 movieData.release_date || movieData.first_air_date || ''
               )}</p>
-              <a class="movie-modal__youtube" href="https://www.youtube.com/watch?v=${
-                videos.results[0]?.key || MovieModal.specialVideoKey
-              }" target="_blank">YouTube</a>
+              <a class="movie-modal__youtube" href="${video}" target="_blank">YouTube</a>
             </div>
-            <div class="movie-modal__cast">${actorsCast}</div>
+            <div class="movie-modal__cast">${actorsCast.join('')}</div>
           </div>
         </div>
       </div>
