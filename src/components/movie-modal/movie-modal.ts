@@ -7,6 +7,7 @@ export default class MovieModal {
   constructor() {
     this.container = document.createElement('div') as HTMLDivElement;
     this.container.classList.add('movie-modal', 'hide');
+    this.container.setAttribute('tabindex', '0');
   }
 
   public render = (
@@ -84,6 +85,7 @@ export default class MovieModal {
 
   public show = (): void => {
     this.container.classList.remove('hide');
+    this.container.focus();
   };
 
   public hide = (): void => {
