@@ -1,4 +1,4 @@
-export default class Preloader {
+class Preloader {
   container: HTMLDivElement;
 
   constructor() {
@@ -9,13 +9,13 @@ export default class Preloader {
   public render = (): HTMLDivElement => {
     this.container.innerHTML = `
       <div class="preloader__inner">
-        <div>L</div>
-        <div>o</div>
-        <div>a</div>
-        <div>d</div>
-        <div>i</div>
-        <div>n</div>
-        <div>g</div>
+        <span class="preloader__item">L</span>
+        <span class="preloader__item">o</span>
+        <span class="preloader__item">a</span>
+        <span class="preloader__item">d</span>
+        <span class="preloader__item">i</span>
+        <span class="preloader__item">n</span>
+        <span class="preloader__item">g</span>
       </div>
     `;
 
@@ -30,3 +30,6 @@ export default class Preloader {
     this.container.classList.remove('hide');
   };
 }
+
+const preloader = new Preloader();
+export default preloader;

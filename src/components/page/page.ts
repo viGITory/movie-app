@@ -3,7 +3,7 @@ import getData from '../../utils/getData';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import Preloader from '../preloader/preloader';
+import preloader from '../preloader/preloader';
 import Movie from '../movie/movie';
 import MovieModal from '../movie-modal/movie-modal';
 
@@ -20,11 +20,9 @@ export default class Page {
   searchTvButton!: HTMLButtonElement;
   categoryButtons!: NodeListOf<HTMLElement>;
 
-  preloader: Preloader;
   movieModal: MovieModal;
 
   constructor() {
-    this.preloader = new Preloader();
     this.movieModal = new MovieModal();
   }
 
@@ -84,7 +82,7 @@ export default class Page {
   private addComponents = (): void => {
     this.moviesContainer.insertAdjacentElement(
       'beforebegin',
-      this.preloader.render()
+      preloader.render()
     );
     Page.container.append(this.movieModal.modalContainer);
   };
@@ -92,7 +90,7 @@ export default class Page {
   private showMovies = (): void => {
     this.moviesContainer.innerHTML = '';
     Page.pageCount = 1;
-    this.preloader.show();
+    preloader.show();
     this.moviesContainer.classList.add('hide');
     this.addMovies(Page.currentUrl);
   };
@@ -143,7 +141,7 @@ export default class Page {
     }
 
     setTimeout(() => {
-      this.preloader.hide();
+      preloader.hide();
       this.moviesContainer.classList.remove('hide');
     }, 2000);
   };
@@ -247,7 +245,7 @@ export default class Page {
       Page.container.querySelector('[data-type=load]') as HTMLButtonElement
     ).addEventListener('click', () => {
       Page.pageCount++;
-      this.preloader.show();
+      preloader.show();
       this.moviesContainer.classList.add('hide');
       this.addMovies(Page.currentUrl);
     });
