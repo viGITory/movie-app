@@ -1,6 +1,6 @@
 import { IMovieData, IActors, IVideos, IGenres } from '../../scripts/types';
 
-export default class MovieModal {
+class MovieModal {
   container: HTMLDivElement;
   closeButton!: HTMLButtonElement;
 
@@ -15,7 +15,7 @@ export default class MovieModal {
     actors: IActors,
     videos: IVideos,
     genres: IGenres
-  ): void => {
+  ): HTMLDivElement => {
     let video: string = 'https://www.youtube.com';
     let actorsCast: string[] = [];
     let genresList: string[] = [];
@@ -73,11 +73,9 @@ export default class MovieModal {
         </div>
       </div>
     `;
-  };
 
-  get modalContainer(): HTMLDivElement {
     return this.container;
-  }
+  };
 
   private formatDate = (date: string): string => {
     return date.split('-').reverse().join('/');
@@ -100,3 +98,6 @@ export default class MovieModal {
     this.closeButton.addEventListener('click', this.hide);
   };
 }
+
+const movieModal = new MovieModal();
+export default movieModal;

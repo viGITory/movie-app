@@ -5,7 +5,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import preloader from '../preloader/preloader';
 import Movie from '../movie/movie';
-import MovieModal from '../movie-modal/movie-modal';
+import movieModal from '../movie-modal/movie-modal';
 
 export default class Page {
   private static container = document.getElementById('root') as HTMLDivElement;
@@ -19,12 +19,6 @@ export default class Page {
   searchMovieButton!: HTMLButtonElement;
   searchTvButton!: HTMLButtonElement;
   categoryButtons!: NodeListOf<HTMLElement>;
-
-  movieModal: MovieModal;
-
-  constructor() {
-    this.movieModal = new MovieModal();
-  }
 
   private render = (): HTMLDivElement => {
     Page.container.innerHTML = `
@@ -84,7 +78,7 @@ export default class Page {
       'beforebegin',
       preloader.render()
     );
-    Page.container.append(this.movieModal.modalContainer);
+    Page.container.append(movieModal.container);
   };
 
   private showMovies = (): void => {
@@ -123,9 +117,9 @@ export default class Page {
               `https://api.themoviedb.org/3/${Page.currentType}/${item.id}?api_key=${Page.apiKey}&language=en-US`
             );
 
-            this.movieModal.render(item, actors, videos, genres);
-            this.movieModal.addListeners();
-            this.movieModal.show();
+            movieModal.render(item, actors, videos, genres);
+            movieModal.addListeners();
+            movieModal.show();
           });
 
           this.moviesContainer.append(movie);
@@ -160,7 +154,7 @@ export default class Page {
     });
 
     document.addEventListener('keyup', (event: KeyboardEvent) => {
-      if (event.key === 'Escape') this.movieModal.hide();
+      if (event.key === 'Escape') movieModal.hide();
     });
 
     document.addEventListener('click', (event: MouseEvent) => {
@@ -171,7 +165,7 @@ export default class Page {
           '.movie, .movie *, .movie-modal__inner, .movie-modal__inner *'
         )
       )
-        this.movieModal.hide();
+        movieModal.hide();
     });
 
     (
