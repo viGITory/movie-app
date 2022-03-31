@@ -243,6 +243,15 @@ export default class Page {
       this.moviesContainer.classList.add('hide');
       this.addMovies(Page.currentUrl);
     });
+
+    (
+      Page.container.querySelector('[data-scroll]') as HTMLButtonElement
+    ).addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    });
   };
 
   public init = (): void => {
