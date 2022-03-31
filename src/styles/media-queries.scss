@@ -33,14 +33,14 @@
       max-width: 276px;
       margin: 0 auto;
       gap: initial;
+    }
 
-      div {
-        width: 35px;
-        height: 35px;
+    &__item {
+      width: 35px;
+      height: 35px;
 
-        font-size: 14px;
-        line-height: 35px;
-      }
+      font-size: 14px;
+      line-height: 35px;
     }
   }
 }
@@ -54,10 +54,10 @@
       align-items: center;
       width: auto;
       max-width: 100%;
-      padding: 5px 10px;
-      margin-bottom: 10px;
+      padding: 10px;
 
-      border-radius: $small-radius;
+      border-top-left-radius: $middle-radius;
+      border-top-right-radius: $middle-radius;
       box-shadow: $inner-shadow;
     }
 
@@ -69,6 +69,11 @@
 
     &__close-button {
       border: 1px solid $light-transparent;
+    }
+
+    &__poster-wrapper {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
   }
 }

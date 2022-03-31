@@ -13,31 +13,37 @@
 
   transition: box-shadow .2s, border-color .2s, background-color .2s, color .2s;
 
-  &[data-button="theme"] {
-    width: 41px;
-    height: 41px;
-    padding: 5px;
+  &:hover,
+  &:focus {
+    border-color: transparent;
+    box-shadow: $inner-shadow;
+  }
 
-    svg,
-    svg * {
+  svg {
+    width: 100%;
+    height: 100%;
+
+    * {
       transition: fill .2s;
     }
+  }
+
+  &[data-theme],
+  &[data-scroll] {
+    width: 41px;
+    height: 41px;
+  }
+
+  &[data-theme] {
+    padding: 5px;
 
     svg {
-      width: 100%;
-      height: 100%;
-
       fill: $primary-bright;
     }
 
     path:last-child {
       fill: $light-transparent;
     }
-  }
-
-  &[data-search="movie"],
-  &[data-search="tv"] {
-    display: block;
   }
 
   &[data-search="movie"] {
@@ -52,13 +58,15 @@
     border-bottom-left-radius: 0;
   }
 
-  &[data-button="load"] {
+  &[data-load] {
     margin-top: auto;
   }
 
-  &:hover,
-  &:focus {
-    border-color: transparent;
-    box-shadow: $inner-shadow;
+  &[data-scroll] {
+    display: block;
+
+    path {
+      fill: $primary-dark;
+    }
   }
 }

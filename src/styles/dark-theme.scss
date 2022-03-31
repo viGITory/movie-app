@@ -5,11 +5,7 @@
 
   .page {
     color: $primary-light;
-
-    &,
-    &::-webkit-scrollbar-track {
-      background-color: $dark;
-    }
+    background-color: $dark;
 
     * ::selection {
       color: $middle-dark;
@@ -29,6 +25,7 @@
   .button {
     background-color: $middle-dark;
     border-color: transparent;
+    box-shadow: $small-outer-shadow;
 
     &:hover,
     &:focus,
@@ -45,15 +42,17 @@
       background-color: $primary-bright;
     }
 
-    &[data-button="theme"] svg {
-      fill: $middle-dark;
+    &[data-theme] {
+      svg {
+        fill: $middle-dark;
 
-      path:last-child {
-        fill: $primary-light;
+        path:last-child {
+          fill: $primary-light;
+        }
       }
     }
 
-    &[data-button="theme"],
+    &[data-theme],
     &[data-search="movie"],
     &[data-search="tv"] {
       background-color: $light-dark;
@@ -62,6 +61,12 @@
       &:focus,
       &.active-btn {
         background-color: $primary-bright;
+      }
+    }
+
+    &[data-scroll] {
+      path {
+        fill: $primary-light;
       }
     }
   }
@@ -75,13 +80,14 @@
       color: $primary-bright;
     }
 
-    &__theme-button,
     &__input {
       background-color: $light-dark;
-    }
+      box-shadow: $small-outer-shadow;
 
-    &__input {
-      box-shadow: none;
+      &:hover,
+      &:focus {
+        box-shadow: none;
+      }
 
       &::placeholder {
         color: $primary-light;
@@ -90,12 +96,14 @@
   }
 
   .main {
-    &__scroll-button path {
-      fill: $primary-light;
-    }
-
     &__error-wrapper {
       background-color: $middle-dark;
+    }
+  }
+
+  .preloader {
+    &__item {
+      animation-name: preloader-dark;
     }
   }
 
@@ -109,6 +117,7 @@
     &__title,
     &__rate {
       background-color: $light-dark;
+      box-shadow: $small-outer-shadow;
     }
 
     &__poster {
@@ -145,21 +154,24 @@
 
     &__title,
     &__close-button,
+    &__youtube {
+      box-shadow: $small-outer-shadow;
+    }
+
+    &__title,
+    &__close-button,
     &__genre,
     &__youtube {
       background-color: $light-dark;
     }
 
-    &__title,
-    &__description-wrapper {
-      box-shadow: none;
-    }
 
     &__close-button,
     &__youtube {
       &:hover,
       &:focus {
         background-color: $primary-bright;
+        box-shadow: none;
       }
     }
 
@@ -182,6 +194,7 @@
 
     &__description-wrapper {
       background-color: $middle-dark;
+      box-shadow: none;
     }
 
     &__bottom {
@@ -198,9 +211,13 @@
 
   @media (max-width: 640px) {
     .movie-modal {
+      &__top,
+      &__title {
+        box-shadow: none;
+      }
+
       &__top {
         background-color: $middle-dark;
-        box-shadow: none;
       }
 
       &__title {
@@ -222,5 +239,11 @@
         border-image-slice: 1;
       }
     }
+  }
+}
+
+@keyframes preloader-dark {
+  50% {
+    box-shadow: $small-outer-shadow;
   }
 }

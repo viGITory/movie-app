@@ -42,20 +42,6 @@
   &__scroll-button {
     position: absolute;
     right: 0;
-    box-sizing: border-box;
-    display: block;
-    width: 41px;
-    height: 41px;
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    path {
-      transition: fill .2s;
-      fill: $primary-dark;
-    }
   }
 
   &__error-wrapper {

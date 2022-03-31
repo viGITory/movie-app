@@ -28,6 +28,13 @@
     opacity: 1;
   }
 
+  &:hover > &__title,
+  &:hover > &__rate,
+  &:focus > &__title,
+  &:focus > &__rate {
+    box-shadow: none;
+  }
+
   &,
   &__poster {
     background-repeat: no-repeat;

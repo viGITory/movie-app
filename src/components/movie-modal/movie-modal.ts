@@ -59,8 +59,8 @@ class MovieModal {
           </div>
         </div>
         <div class="movie-modal__description-wrapper">
-          <p class="movie-modal__description">${movieData.overview}</p>
           <div class="movie-modal__genres-wrapper">${genresList.join('')}</div>
+          <p class="movie-modal__description">${movieData.overview}</p>
           <div class="movie-modal__bottom">
             <div class="movie-modal__release">
               <p class="movie-modal__release-date">Release date: ${this.formatDate(

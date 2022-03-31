@@ -131,7 +131,6 @@
     }
   }
 
-  &__poster-wrapper,
   &__description,
   &__genres-wrapper {
     margin-bottom: 10px;
@@ -145,8 +144,12 @@
   }
 
   &__poster-wrapper {
+    overflow: hidden;
+
     background-image: url("../assets/svg/no-image.svg");
     background-size: 30% auto;
+    border-top-left-radius: $middle-radius;
+    border-top-right-radius: $middle-radius;
   }
 
   &__poster,
@@ -156,9 +159,9 @@
     background-blend-mode: multiply;
   }
 
-  &__poster,
   &__description-wrapper {
-    border-radius: $middle-radius;
+    border-bottom-right-radius: $middle-radius;
+    border-bottom-left-radius: $middle-radius;
   }
 
   &__poster {
